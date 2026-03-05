@@ -1,6 +1,6 @@
 """Tests pour les fonctions mathématiques."""
 
-from app_api.maths import add, square, sub
+from maths import add, square, sub
 
 
 def test_add():

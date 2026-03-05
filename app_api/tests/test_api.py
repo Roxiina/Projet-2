@@ -1,8 +1,10 @@
 """Tests pour l'API FastAPI."""
 
+import os
 import sys
 from pathlib import Path
 
+import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -12,12 +14,13 @@ api_path = Path(__file__).parent.parent
 sys.path.insert(0, str(api_path))
 
 from main import app
-from modules.connect import Base, get_session
+from modules.connect import Base, DataModel, get_session
 
 # Base de données de test en mémoire
-SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
+# Utiliser file-based SQLite au lieu de :memory: pour éviter les problèmes de connexions multiples
+SQLALCHEMY_DATABASE_URL = "sqlite:///./test_db.sqlite"
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
+engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}, echo=False)
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
@@ -32,8 +35,32 @@ def override_get_session():
 
 app.dependency_overrides[get_session] = override_get_session
 
-# Créer les tables
-Base.metadata.create_all(bind=engine)
+
+@pytest.fixture(scope="module", autouse=True)
+def cleanup_database():
+    """Fixture pour nettoyer le fichier de base de données après tous les tests."""
+    yield
+    # Fermer toutes les connexions
+    engine.dispose()
+    # Supprimer le fichier de test après tous les tests du module
+    db_file = Path("./test_db.sqlite")
+    try:
+        if db_file.exists():
+            db_file.unlink()
+    except PermissionError:
+        # Sur Windows, le fichier peut encore être verrouillé
+        pass
+
+
+@pytest.fixture(scope="function", autouse=True)
+def setup_database():
+    """Fixture pour créer et nettoyer la base de données pour chaque test."""
+    # Créer les tables avant chaque test
+    Base.metadata.create_all(bind=engine)
+    yield
+    # Nettoyer après chaque test
+    Base.metadata.drop_all(bind=engine)
+
 
 client = TestClient(app)
 
