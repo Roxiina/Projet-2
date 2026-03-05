@@ -35,10 +35,8 @@ if ($Service -eq "") {
 
 ### test.ps1
 ```powershell
-# Lance les tests
-Set-Location app_api
-uv run pytest tests/ -v --cov
-Set-Location ..
+# Lance les tests depuis la racine
+uv run --directory ./app_api pytest ../tests/ -v
 ```
 
 ## Utilisation

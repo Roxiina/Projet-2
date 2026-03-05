@@ -32,7 +32,6 @@ packages = ["maths", "models", "modules"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
-testpaths = ["tests"]
 addopts = "-v --cov=. --cov-report=html --cov-report=term"
 
 [tool.ruff]
@@ -43,5 +42,4 @@ target-version = "py311"
 select = ["E", "F", "I", "N", "W"]
 ignore = [
     "N806",  # Variable in function should be lowercase (for SQLAlchemy SessionLocal)
-    "E402",  # Module level import not at top of file (needed in tests for path setup)
 ]

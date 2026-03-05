@@ -51,5 +51,10 @@ coverage.xml
 htmlcov/
 .pytest_cache/
 
+# Sphinx documentation
+docs/_build/
+docs/_static/.buildinfo
+docs/_static/*.js_t
+
 # Docker
 .dockerignore

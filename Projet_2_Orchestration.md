@@ -44,7 +44,7 @@ testpaths = ["tests"]
 Les tests seront lancés simplement depuis la racine avec cette commande: 
 
 ```bash
-uv run pytest app_api/tests
+uv run --directory ./app_api pytest ../tests/
 ```
 
 ### Phase B : Variables d'Environnement et Hygiène

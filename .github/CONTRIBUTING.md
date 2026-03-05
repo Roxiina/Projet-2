@@ -33,10 +33,10 @@ git checkout -b fix/correction-bug
 
 ```bash
 # Tests de l'API
-cd app_api
-uv run pytest tests/ -v
+uv run --directory ./app_api pytest ../tests/ -v
 
 # Linting
+cd app_api
 uv run ruff check .
 ```
 

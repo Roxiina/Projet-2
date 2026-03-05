@@ -29,12 +29,15 @@ Une fois l'API lancée, accédez à :
 
 ## 🧪 Tests
 
-```bash
-# Tests avec couverture
-uv run pytest tests/ -v --cov
+Les tests sont situés à la racine du projet dans le dossier `tests/`.
 
-# Tests avec rapport HTML
-uv run pytest tests/ -v --cov --cov-report=html
+```bash
+# Tests depuis la racine du projet
+uv run --directory ./app_api pytest ../tests/ -v
+
+# Avec rapport de couverture
+cd ..
+uv run --directory ./app_api pytest ../tests/ -v
 ```
 
 ## 📁 Structure
@@ -53,13 +56,11 @@ app_api/
 │   └── crud.py         # Opérations CRUD
 ├── data/              # Données de test
 │   └── moncsv.csv
-├── tests/             # Tests unitaires
-│   ├── __init__.py
-│   ├── test_api.py
-│   └── test_math_csv.py
 ├── main.py            # Point d'entrée
 ├── Dockerfile
 └── pyproject.toml
+
+Note: Les tests sont situés dans tests/ à la racine du projet.
 ```
 
 ## 🔌 Endpoints

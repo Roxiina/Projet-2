@@ -2,18 +2,16 @@
 Write-Host "Lancement des tests..." -ForegroundColor Yellow
 Write-Host ""
 
-Set-Location app_api
-
 # Installation des dependances si necessaire
-if (-not (Test-Path ".venv")) {
+if (-not (Test-Path "app_api\.venv")) {
     Write-Host "Installation des dependances..." -ForegroundColor Cyan
-    uv sync
+    Set-Location app_api
+    uv sync --extra dev
+    Set-Location ..
 }
 
-# Lancement des tests
-uv run pytest tests/ -v --cov
-
-Set-Location ..
+# Lancement des tests depuis la racine
+uv run --directory ./app_api pytest ../tests/ -v
 
 Write-Host ""
 Write-Host "Tests termines!" -ForegroundColor Green
