@@ -1,10 +1,11 @@
 """Tests pour l'API FastAPI."""
-import pytest
+
+import sys
+from pathlib import Path
+
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-import sys
-from pathlib import Path
 
 # Ajouter le chemin de l'API au PYTHONPATH
 api_path = Path(__file__).parent.parent
@@ -16,10 +17,7 @@ from modules.connect import Base, get_session
 # Base de données de test en mémoire
 SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
 
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL,
-    connect_args={"check_same_thread": False}
-)
+engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
@@ -57,10 +55,7 @@ def test_health_check():
 
 def test_create_data():
     """Test de la création de données."""
-    data = {
-        "value": 42.5,
-        "description": "Test data"
-    }
+    data = {"value": 42.5, "description": "Test data"}
     response = client.post("/data", json=data)
     assert response.status_code == 201
     response_data = response.json()
@@ -72,9 +67,7 @@ def test_create_data():
 
 def test_create_data_without_description():
     """Test de la création de données sans description."""
-    data = {
-        "value": 100.0
-    }
+    data = {"value": 100.0}
     response = client.post("/data", json=data)
     assert response.status_code == 201
     response_data = response.json()
@@ -87,7 +80,7 @@ def test_get_all_data():
     # Créer quelques données de test
     client.post("/data", json={"value": 10.0, "description": "First"})
     client.post("/data", json={"value": 20.0, "description": "Second"})
-    
+
     response = client.get("/data")
     assert response.status_code == 200
     data = response.json()
@@ -98,12 +91,9 @@ def test_get_all_data():
 def test_get_data_by_id():
     """Test de la récupération d'une donnée par ID."""
     # Créer une donnée
-    create_response = client.post(
-        "/data",
-        json={"value": 50.0, "description": "Test by ID"}
-    )
+    create_response = client.post("/data", json={"value": 50.0, "description": "Test by ID"})
     created_id = create_response.json()["id"]
-    
+
     # Récupérer par ID
     response = client.get(f"/data/{created_id}")
     assert response.status_code == 200
@@ -125,7 +115,7 @@ def test_create_data_invalid():
     # Valeur manquante
     response = client.post("/data", json={"description": "No value"})
     assert response.status_code == 422  # Unprocessable Entity
-    
+
     # Type incorrect
     response = client.post("/data", json={"value": "not a number"})
     assert response.status_code == 422
@@ -136,13 +126,13 @@ def test_pagination():
     # Créer plusieurs données
     for i in range(10):
         client.post("/data", json={"value": float(i), "description": f"Data {i}"})
-    
+
     # Test avec limit
     response = client.get("/data?limit=5")
     assert response.status_code == 200
     data = response.json()
     assert len(data) <= 5
-    
+
     # Test avec skip et limit
     response = client.get("/data?skip=5&limit=5")
     assert response.status_code == 200

@@ -1,13 +1,15 @@
 """Application Streamlit principale."""
-import streamlit as st
+
 import os
+
+import streamlit as st
 
 # Configuration de la page
 st.set_page_config(
     page_title="Application de Gestion de Données",
     page_icon="📊",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
 )
 
 # Page d'accueil

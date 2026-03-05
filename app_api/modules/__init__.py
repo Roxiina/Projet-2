@@ -1,6 +1,7 @@
 """Package modules pour la logique métier."""
-from .connect import get_session, init_db, DataModel
-from .crud import create_data, get_all_data, get_data_by_id, delete_data
+
+from .connect import DataModel, get_session, init_db
+from .crud import create_data, delete_data, get_all_data, get_data_by_id
 
 __all__ = [
     "get_session",
@@ -9,5 +10,5 @@ __all__ = [
     "create_data",
     "get_all_data",
     "get_data_by_id",
-    "delete_data"
+    "delete_data",
 ]

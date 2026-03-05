@@ -1,9 +1,11 @@
 """Page pour lire et afficher les données."""
-import streamlit as st
-import requests
-import pandas as pd
+
 import os
 from datetime import datetime
+
+import pandas as pd
+import requests
+import streamlit as st
 
 st.set_page_config(page_title="Lire les Données", page_icon="📖")
 
@@ -33,27 +35,23 @@ with st.expander("⚙️ Paramètres"):
 # Récupérer les données
 try:
     with st.spinner("Chargement des données..."):
-        response = requests.get(
-            f"{API_URL}/data",
-            params={"limit": limit, "skip": skip},
-            timeout=5
-        )
-        
+        response = requests.get(f"{API_URL}/data", params={"limit": limit, "skip": skip}, timeout=5)
+
         if response.status_code == 200:
             data = response.json()
-            
+
             if data:
                 # Convertir en DataFrame pour un affichage meilleur
                 df = pd.DataFrame(data)
-                
+
                 # Formater la colonne created_at
-                df['created_at'] = pd.to_datetime(df['created_at']).dt.strftime('%Y-%m-%d %H:%M:%S')
-                
+                df["created_at"] = pd.to_datetime(df["created_at"]).dt.strftime("%Y-%m-%d %H:%M:%S")
+
                 # Afficher les statistiques si demandé
                 if show_stats:
                     st.subheader("📊 Statistiques")
                     col1, col2, col3, col4 = st.columns(4)
-                    
+
                     with col1:
                         st.metric("Total d'entrées", len(data))
                     with col2:
@@ -62,19 +60,17 @@ try:
                         st.metric("Valeur min", f"{df['value'].min():.2f}")
                     with col4:
                         st.metric("Valeur max", f"{df['value'].max():.2f}")
-                    
+
                     st.markdown("---")
-                
+
                 # Afficher le tableau
                 st.subheader(f"📋 Données ({len(data)} résultat(s))")
-                
+
                 # Options d'affichage
                 display_mode = st.radio(
-                    "Mode d'affichage",
-                    ["Tableau", "Cartes", "Détails"],
-                    horizontal=True
+                    "Mode d'affichage", ["Tableau", "Cartes", "Détails"], horizontal=True
                 )
-                
+
                 if display_mode == "Tableau":
                     # Affichage en tableau
                     st.dataframe(
@@ -85,19 +81,19 @@ try:
                             "id": st.column_config.NumberColumn("ID", format="%d"),
                             "value": st.column_config.NumberColumn("Valeur", format="%.2f"),
                             "description": st.column_config.TextColumn("Description"),
-                            "created_at": st.column_config.TextColumn("Date de création")
-                        }
+                            "created_at": st.column_config.TextColumn("Date de création"),
+                        },
                     )
-                    
+
                     # Option de téléchargement
-                    csv = df.to_csv(index=False).encode('utf-8')
+                    csv = df.to_csv(index=False).encode("utf-8")
                     st.download_button(
                         label="📥 Télécharger en CSV",
                         data=csv,
                         file_name=f"data_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
                         mime="text/csv",
                     )
-                
+
                 elif display_mode == "Cartes":
                     # Affichage en cartes
                     for item in data:
@@ -105,31 +101,31 @@ try:
                             col1, col2 = st.columns([3, 1])
                             with col1:
                                 st.markdown(f"### 🔢 Valeur: **{item['value']:.2f}**")
-                                if item.get('description'):
+                                if item.get("description"):
                                     st.markdown(f"*{item['description']}*")
                                 st.caption(f"📅 Créé le : {item['created_at'][:10]}")
                             with col2:
-                                st.metric("ID", item['id'])
+                                st.metric("ID", item["id"])
                             st.markdown("---")
-                
+
                 else:  # Détails
                     # Affichage détaillé
                     for idx, item in enumerate(data, 1):
                         with st.expander(f"📄 Entrée #{item['id']} - Valeur: {item['value']:.2f}"):
                             col1, col2 = st.columns(2)
                             with col1:
-                                st.write("**ID:**", item['id'])
+                                st.write("**ID:**", item["id"])
                                 st.write("**Valeur:**", f"{item['value']:.2f}")
                             with col2:
-                                st.write("**Date de création:**", item['created_at'])
-                                st.write("**Description:**", item.get('description', 'N/A'))
-                
+                                st.write("**Date de création:**", item["created_at"])
+                                st.write("**Description:**", item.get("description", "N/A"))
+
             else:
                 st.info("ℹ️ Aucune donnée disponible. Ajoutez des données via la page **Insert**.")
-        
+
         else:
             st.error(f"❌ Erreur {response.status_code}: {response.text}")
-            
+
 except requests.exceptions.ConnectionError:
     st.error(f"❌ Impossible de se connecter à l'API ({API_URL})")
     st.info("💡 Assurez-vous que l'API est en cours d'exécution")

@@ -1,7 +1,9 @@
 """Page pour insérer des données."""
-import streamlit as st
-import requests
+
 import os
+
+import requests
+import streamlit as st
 
 st.set_page_config(page_title="Insérer des Données", page_icon="🔢")
 
@@ -19,7 +21,7 @@ Cette page permet d'ajouter de nouvelles données dans la base de données.
 # Formulaire pour saisir les données
 with st.form("insert_form"):
     st.subheader("Nouvelle Donnée")
-    
+
     value = st.number_input(
         "Valeur numérique",
         min_value=-1000000.0,
@@ -27,37 +29,28 @@ with st.form("insert_form"):
         value=0.0,
         step=0.1,
         format="%.2f",
-        help="Entrez une valeur numérique"
+        help="Entrez une valeur numérique",
     )
-    
+
     description = st.text_area(
-        "Description (optionnelle)",
-        max_chars=500,
-        help="Ajoutez une description pour cette valeur"
+        "Description (optionnelle)", max_chars=500, help="Ajoutez une description pour cette valeur"
     )
-    
+
     submitted = st.form_submit_button("💾 Enregistrer", use_container_width=True)
-    
+
     if submitted:
         # Préparer les données
-        data = {
-            "value": value,
-            "description": description if description else None
-        }
-        
+        data = {"value": value, "description": description if description else None}
+
         # Envoyer à l'API
         try:
             with st.spinner("Envoi des données..."):
-                response = requests.post(
-                    f"{API_URL}/data",
-                    json=data,
-                    timeout=5
-                )
-                
+                response = requests.post(f"{API_URL}/data", json=data, timeout=5)
+
                 if response.status_code == 201:
                     result = response.json()
                     st.success("✅ Données enregistrées avec succès !")
-                    
+
                     # Afficher les détails
                     col1, col2, col3 = st.columns(3)
                     with col1:
@@ -66,15 +59,15 @@ with st.form("insert_form"):
                         st.metric("Valeur", f"{result['value']:.2f}")
                     with col3:
                         st.info(f"📅 {result['created_at'][:10]}")
-                    
+
                     if result.get("description"):
                         st.info(f"📝 Description : {result['description']}")
-                    
+
                     # Message de confirmation
                     st.balloons()
                 else:
                     st.error(f"❌ Erreur {response.status_code}: {response.text}")
-                    
+
         except requests.exceptions.ConnectionError:
             st.error(f"❌ Impossible de se connecter à l'API ({API_URL})")
             st.info("💡 Assurez-vous que l'API est en cours d'exécution")

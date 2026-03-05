@@ -31,4 +31,7 @@ target-version = "py311"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "W"]
-ignore = []
+ignore = [
+    "W293",  # Blank line contains whitespace (in multiline strings)
+    "E722",  # Bare except (acceptable for simple error handling)
+]

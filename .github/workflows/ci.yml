@@ -28,7 +28,7 @@ jobs:
     - name: Installation des dépendances de l'API
       working-directory: ./app_api
       run: |
-        uv sync
+        uv sync --extra dev
     
     - name: Linting avec Ruff (API)
       working-directory: ./app_api
@@ -51,7 +51,7 @@ jobs:
     - name: Installation des dépendances du Frontend
       working-directory: ./app_front
       run: |
-        uv sync
+        uv sync --extra dev
     
     - name: Linting avec Ruff (Frontend)
       working-directory: ./app_front

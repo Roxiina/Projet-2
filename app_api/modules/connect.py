@@ -1,9 +1,11 @@
 """Module de connexion à la base de données avec SQLAlchemy."""
+
 import os
-from sqlalchemy import create_engine, Column, Integer, Float, String, DateTime
+from datetime import datetime
+
+from sqlalchemy import Column, DateTime, Float, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from datetime import datetime
 
 # Base pour les modèles
 Base = declarative_base()
@@ -11,8 +13,9 @@ Base = declarative_base()
 
 class DataModel(Base):
     """Modèle SQLAlchemy pour la table data."""
+
     __tablename__ = "data"
-    
+
     id = Column(Integer, primary_key=True, index=True)
     value = Column(Float, nullable=False)
     description = Column(String, nullable=True)
@@ -21,12 +24,12 @@ class DataModel(Base):
 
 def get_database_url() -> str:
     """Récupère l'URL de la base de données depuis les variables d'environnement.
-    
+
     Returns:
         URL de connexion à la base de données
     """
     db_type = os.getenv("DB_TYPE", "sqlite")
-    
+
     if db_type == "postgresql":
         user = os.getenv("POSTGRES_USER", "postgres")
         password = os.getenv("POSTGRES_PASSWORD", "postgres")
@@ -41,21 +44,18 @@ def get_database_url() -> str:
 
 def get_engine():
     """Crée et retourne un engine SQLAlchemy.
-    
+
     Returns:
         Engine SQLAlchemy configuré
     """
     database_url = get_database_url()
-    
+
     # Pour SQLite, on ajoute check_same_thread=False
     if database_url.startswith("sqlite"):
-        engine = create_engine(
-            database_url,
-            connect_args={"check_same_thread": False}
-        )
+        engine = create_engine(database_url, connect_args={"check_same_thread": False})
     else:
         engine = create_engine(database_url)
-    
+
     return engine
 
 
@@ -68,7 +68,7 @@ def init_db():
 
 def get_session():
     """Crée et retourne une session de base de données.
-    
+
     Yields:
         Session SQLAlchemy
     """
