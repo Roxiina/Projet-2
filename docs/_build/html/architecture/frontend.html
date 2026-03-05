@@ -1,0 +1,993 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frontend (Streamlit) &mdash; Documentation Projet 2 - Orchestration et Livraison Continue 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=05dadb3a"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Base de Données" href="database.html" />
+    <link rel="prev" title="Backend (FastAPI)" href="backend.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Projet 2 - Orchestration et Livraison Continue
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">📚 Démarrage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Démarrage Rapide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#prerequis">Prérequis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#installation-de-uv">Installation de uv</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#windows-powershell">Windows (PowerShell)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#linux-macos">Linux/macOS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#etape-1-cloner-le-projet">Étape 1 : Cloner le projet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#etape-2-configuration">Étape 2 : Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#etape-3-lancer-l-application">Étape 3 : Lancer l’application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#mode-developpement">Mode Développement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#mode-production">Mode Production</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#etape-4-acceder-aux-services">Étape 4 : Accéder aux services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#verification">Vérification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../quickstart.html#tester-l-api">Tester l’API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#tests">Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#arret-de-l-application">Arrêt de l’application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quickstart.html#prochaines-etapes">Prochaines étapes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#prerequis-systeme">Prérequis Système</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#logiciels-obligatoires">Logiciels Obligatoires</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#logiciels-optionnels">Logiciels Optionnels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#verification-des-prerequis">Vérification des prérequis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-de-uv">Installation de uv</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#linux-macos">Linux/macOS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#clonage-du-projet">Clonage du Projet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-des-dependances">Installation des Dépendances</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#backend-api-fastapi">Backend (API FastAPI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#frontend-streamlit">Frontend (Streamlit)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#documentation-sphinx">Documentation (Sphinx)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#variables-d-environnement">Variables d’Environnement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#base-de-donnees">Base de Données</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#build-des-images-docker">Build des Images Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#lancement">Lancement</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#mode-developpement">Mode Développement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#mode-detache-background">Mode Détaché (Background)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#verification">Vérification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#sante-des-services">Santé des Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#test-de-l-api">Test de l’API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#test-du-frontend">Test du Frontend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#developpement-local-sans-docker">Développement Local (Sans Docker)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#frontend">Frontend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#depannage">Dépannage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#docker-desktop-n-est-pas-demarre">Docker Desktop n’est pas démarré</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#port-deja-utilise">Port déjà utilisé</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installation.html#uv-non-trouve">uv non trouvé</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#prochaines-etapes">Prochaines Étapes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../configuration.html#variables-d-environnement">Variables d’Environnement</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#fichier-env-principal">Fichier .env Principal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration.html#configuration-par-service">Configuration par Service</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#api-fastapi">API FastAPI</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../configuration.html#configuration-ruff-linting">Configuration Ruff (Linting)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../configuration.html#configuration-pytest">Configuration Pytest</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#frontend-streamlit">Frontend Streamlit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../configuration.html#configuration-streamlit">Configuration Streamlit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration.html#base-de-donnees">Base de Données</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#postgresql-production">PostgreSQL (Production)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#sqlite-developpement-tests">SQLite (Développement/Tests)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration.html#docker">Docker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#dockerfile-api">Dockerfile API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#docker-compose">Docker Compose</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../configuration.html#health-checks">Health Checks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration.html#github-actions">GitHub Actions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#configuration-ci-cd">Configuration CI/CD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../configuration.html#secrets-requis">Secrets Requis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration.html#gitleaks">Gitleaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration.html#ide-configuration">IDE Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#vs-code">VS Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../configuration.html#pycharm">PyCharm</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration.html#configuration-de-production">Configuration de Production</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🏗️ Architecture</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Vue d’Ensemble</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#id1">Vue d’Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#diagramme-d-architecture">Diagramme d’Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#flux-de-donnees">Flux de Données</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#isolation-reseau">Isolation Réseau</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#front-api">front-api</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#api-db">api-db</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#gestion-de-la-persistance">Gestion de la Persistance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#volume-docker">Volume Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#health-checks">Health Checks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#api-health-check">API Health Check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#database-health-check">Database Health Check</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#dependances-entre-services">Dépendances entre Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#scalabilite">Scalabilité</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#securite">Sécurité</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#bonnes-pratiques-implementees">Bonnes Pratiques Implémentées</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#ameliorations-possibles">Améliorations Possibles</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#technologies-utilisees">Technologies Utilisées</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#backend">Backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#frontend">Frontend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#database">Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#devops">DevOps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="backend.html">Backend (FastAPI)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="backend.html#structure-du-backend">Structure du Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend.html#endpoints-api">Endpoints API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="backend.html#route-racine">Route Racine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backend.html#health-check">Health Check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backend.html#creer-une-donnee">Créer une Donnée</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backend.html#recuperer-des-donnees">Récupérer des Données</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backend.html#recuperer-une-donnee-par-id">Récupérer une Donnée par ID</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="backend.html#modeles-de-donnees">Modèles de Données</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="backend.html#pydantic-models-validation">Pydantic Models (Validation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backend.html#sqlalchemy-models-base-de-donnees">SQLAlchemy Models (Base de données)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="backend.html#operations-crud">Opérations CRUD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="backend.html#create">Create</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backend.html#read">Read</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="backend.html#gestion-de-la-base-de-donnees">Gestion de la Base de Données</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="backend.html#connexion">Connexion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backend.html#dependency-injection">Dependency Injection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backend.html#initialisation">Initialisation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="backend.html#modules-mathematiques">Modules Mathématiques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend.html#gestion-des-erreurs">Gestion des Erreurs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="backend.html#validation-pydantic">Validation Pydantic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backend.html#exceptions-http">Exceptions HTTP</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="backend.html#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="backend.html#variables-d-environnement">Variables d’Environnement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backend.html#cors">CORS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="backend.html#documentation-auto-generee">Documentation Auto-générée</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend.html#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Frontend (Streamlit)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#structure-du-frontend">Structure du Frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#architecture-multi-pages">Architecture Multi-Pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#page-d-accueil-main-py">Page d’Accueil (main.py)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#page-d-insertion-pages-0-insert-py">Page d’Insertion (pages/0_insert.py)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#page-de-lecture-pages-1-read-py">Page de Lecture (pages/1_read.py)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#communication-avec-l-api">Communication avec l’API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#operations-api">Opérations API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gestion-des-erreurs">Gestion des Erreurs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#customisation-de-l-interface">Customisation de l’Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-de-la-page">Configuration de la Page</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#theme">Thème</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#widgets-streamlit">Widgets Streamlit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#formulaires">Formulaires</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tableaux-de-donnees">Tableaux de Données</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metriques">Métriques</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#graphiques">Graphiques</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#messages">Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#etat-de-session">État de Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deployment">Deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#variables-d-environnement">Variables d’Environnement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-docker">Configuration Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Base de Données</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="database.html#technologie">Technologie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#schema-de-donnees">Schéma de Données</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#table-data">Table: data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="database.html#colonnes">Colonnes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#modele-sqlalchemy">Modèle SQLAlchemy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#index">Index</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#connexion-a-la-base">Connexion à la Base</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#configuration">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#pool-de-connexions">Pool de Connexions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#dependency-injection">Dependency Injection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#initialisation">Initialisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#operations-crud">Opérations CRUD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#create">Create</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#read">Read</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#update">Update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#delete">Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#configuration-docker">Configuration Docker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#docker-compose-yml">docker-compose.yml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#persistance">Persistance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#variables-d-environnement">Variables d’Environnement</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#fichier-env">Fichier .env</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#tests">Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#sqlite-pour-les-tests">SQLite pour les Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#migration-de-schema">Migration de Schéma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#backup-et-restauration">Backup et Restauration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#backup">Backup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#restauration">Restauration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#monitoring">Monitoring</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#id1">Connexion à la Base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#logs-postgresql">Logs PostgreSQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#optimisation">Optimisation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="database.html#id2">Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="database.html#id3">Pool de Connexions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Tests et Qualité</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/tests.html">Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../testing/tests.html#vue-d-ensemble">Vue d’Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/tests.html#structure-des-tests">Structure des Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/tests.html#lancer-les-tests">Lancer les Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/tests.html#commande-de-base">Commande de Base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/tests.html#options-utiles">Options Utiles</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/tests.html#tests-de-l-api">Tests de l’API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/tests.html#fichier-tests-test-api-py">Fichier: tests/test_api.py</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../testing/tests.html#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../testing/tests.html#tests-implementes">Tests Implémentés</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/tests.html#tests-des-fonctions-math">Tests des Fonctions Math</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/tests.html#fichier-tests-test-math-csv-py">Fichier: tests/test_math_csv.py</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../testing/tests.html#id1">Tests Implémentés</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/tests.html#couverture-de-code">Couverture de Code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/tests.html#generer-un-rapport-de-couverture">Générer un Rapport de Couverture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/tests.html#resultats-actuels">Résultats Actuels</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/tests.html#configuration-pytest">Configuration pytest</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/tests.html#fichier-conftest-py">Fichier conftest.py</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/tests.html#ci-cd">CI/CD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/tests.html#github-actions">GitHub Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/tests.html#badges">Badges</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/tests.html#bonnes-pratiques">Bonnes Pratiques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/tests.html#depannage">Dépannage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/tests.html#import-errors">Import Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/tests.html#database-errors">Database Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/tests.html#test-isolation">Test Isolation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/tests.html#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/coverage.html">Couverture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../testing/coverage.html#vue-d-ensemble">Vue d’Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/coverage.html#rapport-detaille">Rapport Détaillé</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/coverage.html#par-fichier">Par Fichier</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/coverage.html#generation-des-rapports">Génération des Rapports</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/coverage.html#terminal">Terminal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/coverage.html#html">HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/coverage.html#xml-pour-ci-cd">XML (pour CI/CD)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/coverage.html#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/coverage.html#pyproject-toml">pyproject.toml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/coverage.html#fichier-coveragerc">Fichier .coveragerc</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/coverage.html#ameliorer-la-couverture">Améliorer la Couverture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/coverage.html#identifier-les-lignes-manquees">Identifier les Lignes Manquées</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/coverage.html#ajouter-des-tests">Ajouter des Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/coverage.html#bonnes-pratiques">Bonnes Pratiques</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/coverage.html#objectifs-de-couverture">Objectifs de Couverture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/coverage.html#tests-de-qualite">Tests de Qualité</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/coverage.html#ci-cd-integration">CI/CD Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/coverage.html#github-actions">GitHub Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/coverage.html#badge-de-couverture">Badge de Couverture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/coverage.html#codecov">Codecov</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/coverage.html#metriques-de-qualite">Métriques de Qualité</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/coverage.html#en-plus-de-la-couverture">En Plus de la Couverture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/coverage.html#outils-complementaires">Outils Complémentaires</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/coverage.html#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/linting.html">Linting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../testing/linting.html#vue-d-ensemble">Vue d’Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/linting.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/linting.html#utilisation">Utilisation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/linting.html#id1">Linting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/linting.html#formatting">Formatting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/linting.html#fix-automatique">Fix Automatique</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/linting.html#mode-watch">Mode Watch</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/linting.html#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/linting.html#fichier-pyproject-toml">Fichier: pyproject.toml</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../testing/linting.html#options">Options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/linting.html#regles-activees">Règles Activées</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/linting.html#categories">Catégories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/linting.html#exemples-de-regles">Exemples de Règles</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/linting.html#regles-ignorees">Règles Ignorées</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/linting.html#n806">N806</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/linting.html#correction-des-erreurs">Correction des Erreurs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/linting.html#workflow-typique">Workflow Typique</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/linting.html#exemples-de-corrections">Exemples de Corrections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/linting.html#ci-cd">CI/CD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/linting.html#github-actions">GitHub Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/linting.html#pre-commit-hook">Pre-commit Hook</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/linting.html#integration-ide">Intégration IDE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/linting.html#vs-code">VS Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/linting.html#pycharm">PyCharm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../testing/linting.html#vim-neovim">Vim/Neovim</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/linting.html#comparaison-avec-autres-outils">Comparaison avec Autres Outils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/linting.html#bonnes-pratiques">Bonnes Pratiques</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../testing/linting.html#a-eviter">À Éviter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../testing/linting.html#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🚀 Déploiement</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/docker.html">Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/docker.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/docker.html#architecture-docker">Architecture Docker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#trois-services">Trois Services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/docker.html#images-docker">Images Docker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#api-fastapi">API (FastAPI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#frontend-streamlit">Frontend (Streamlit)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/docker.html#docker-compose">Docker Compose</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#fichier-de-developpement">Fichier de Développement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#fichier-de-production">Fichier de Production</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/docker.html#commandes-docker-compose">Commandes Docker Compose</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#developpement">Développement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#production">Production</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#logs">Logs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#sante-des-services">Santé des Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#rebuild">Rebuild</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/docker.html#health-checks">Health Checks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#database">Database</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/docker.html#reseaux">Réseaux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#isolation">Isolation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/docker.html#volumes">Volumes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#persistance-des-donnees">Persistance des Données</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#inspection">Inspection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#backup">Backup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/docker.html#optimisations">Optimisations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#multi-stage-build">Multi-stage Build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#dockerignore">.dockerignore</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/docker.html#depannage">Dépannage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#port-deja-utilise">Port Déjà Utilisé</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#service-unhealthy">Service Unhealthy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment/docker.html#build-lent">Build Lent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/docker.html#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/cicd.html">CI/CD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/cicd.html#vue-d-ensemble">Vue d’Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/cicd.html#workflows">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/cicd.html#workflow-ci">Workflow CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/cicd.html#workflow-security">Workflow Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/cicd.html#workflow-cd">Workflow CD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/cicd.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/cicd.html#badges">Badges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/cicd.html#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/production.html">Production</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/production.html#prerequis">Prérequis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/production.html#deploiement">Déploiement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/production.html#securite">Sécurité</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/production.html#monitoring">Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/production.html#backup">Backup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/secrets.html">Secrets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/secrets.html#configuration-dockerhub">Configuration DockerHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment/secrets.html#documentation-complete">Documentation Complète</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#comment-contribuer">Comment Contribuer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#standards-de-code">Standards de Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#tests">Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/contributing.html#linting">Linting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/troubleshooting.html#docker-desktop-n-est-pas-demarre">Docker Desktop n’est pas démarré</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/troubleshooting.html#port-deja-utilise">Port déjà utilisé</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/troubleshooting.html#tests-echouent">Tests échouent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/troubleshooting.html#service-unhealthy">Service unhealthy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../guides/checklist.html">Checklist</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../guides/checklist.html#fonctionnalites">Fonctionnalités</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/checklist.html#tests">Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/checklist.html#deploiement">Déploiement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../guides/checklist.html#documentation">Documentation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📋 Livrables</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../deliverables/overview.html">Vue d’Ensemble</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../deliverables/overview.html#livrable-1-github-avec-badges">Livrable 1 : GitHub avec Badges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deliverables/overview.html#livrable-2-docker-compose-prod-yml">Livrable 2 : docker-compose.prod.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deliverables/overview.html#livrable-3-gitleaks-actif">Livrable 3 : Gitleaks Actif</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deliverables/technical.html">Aspects Techniques</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../deliverables/technical.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deliverables/technical.html#reseaux-docker">Réseaux Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deliverables/technical.html#health-checks">Health Checks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deliverables/technical.html#tests">Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deliverables/technical.html#qualite-du-code">Qualité du Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deliverables/technical.html#securite">Sécurité</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Projet 2 - Orchestration et Livraison Continue</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Frontend (Streamlit)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/architecture/frontend.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="frontend-streamlit">
+<h1>Frontend (Streamlit)<a class="headerlink" href="#frontend-streamlit" title="Lien vers cette rubrique"></a></h1>
+<p>Architecture du frontend Streamlit.</p>
+<section id="structure-du-frontend">
+<h2>Structure du Frontend<a class="headerlink" href="#structure-du-frontend" title="Lien vers cette rubrique"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>app_front/
+├── pages/               # Pages Streamlit
+│   ├── 0_insert.py     # Page d&#39;insertion de données
+│   └── 1_read.py       # Page de lecture de données
+├── main.py              # Page d&#39;accueil
+├── Dockerfile
+└── pyproject.toml
+</pre></div>
+</div>
+</section>
+<section id="architecture-multi-pages">
+<h2>Architecture Multi-Pages<a class="headerlink" href="#architecture-multi-pages" title="Lien vers cette rubrique"></a></h2>
+<p>Streamlit utilise une <strong>architecture multi-pages</strong> automatique :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">main.py</span></code> → Page d’accueil (<code class="docutils literal notranslate"><span class="pre">/</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pages/0_insert.py</span></code> → Page d’insertion</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pages/1_read.py</span></code> → Page de lecture</p></li>
+</ul>
+</section>
+<section id="page-d-accueil-main-py">
+<h2>Page d’Accueil (main.py)<a class="headerlink" href="#page-d-accueil-main-py" title="Lien vers cette rubrique"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
+
+<span class="n">st</span><span class="o">.</span><span class="n">set_page_config</span><span class="p">(</span>
+    <span class="n">page_title</span><span class="o">=</span><span class="s2">&quot;Projet 2 - Accueil&quot;</span><span class="p">,</span>
+    <span class="n">page_icon</span><span class="o">=</span><span class="s2">&quot;🏠&quot;</span><span class="p">,</span>
+    <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;wide&quot;</span>
+<span class="p">)</span>
+
+<span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;🏠 Bienvenue sur l&#39;Application Projet 2&quot;</span><span class="p">)</span>
+
+<span class="n">st</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Cette application permet de gérer des données via une API FastAPI.</span>
+
+<span class="s2">### Fonctionnalités</span>
+
+<span class="s2">* 📝 **Insertion** : Ajouter de nouvelles données</span>
+<span class="s2">* 📊 **Lecture** : Visualiser les données existantes</span>
+
+<span class="s2">### Navigation</span>
+
+<span class="s2">Utilisez le menu latéral pour naviguer entre les pages.</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="page-d-insertion-pages-0-insert-py">
+<h2>Page d’Insertion (pages/0_insert.py)<a class="headerlink" href="#page-d-insertion-pages-0-insert-py" title="Lien vers cette rubrique"></a></h2>
+<p>Cette page permet d’ajouter des données via l’API.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">API_URL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;API_URL&quot;</span><span class="p">,</span> <span class="s2">&quot;http://localhost:8000&quot;</span><span class="p">)</span>
+
+<span class="n">st</span><span class="o">.</span><span class="n">set_page_config</span><span class="p">(</span>
+    <span class="n">page_title</span><span class="o">=</span><span class="s2">&quot;Insertion de données&quot;</span><span class="p">,</span>
+    <span class="n">page_icon</span><span class="o">=</span><span class="s2">&quot;📝&quot;</span>
+<span class="p">)</span>
+
+<span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;📝 Insertion de Données&quot;</span><span class="p">)</span>
+
+<span class="c1"># Formulaire</span>
+<span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">form</span><span class="p">(</span><span class="s2">&quot;insert_form&quot;</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">text_input</span><span class="p">(</span><span class="s2">&quot;Nom&quot;</span><span class="p">,</span> <span class="n">placeholder</span><span class="o">=</span><span class="s2">&quot;Alice&quot;</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s2">&quot;Valeur&quot;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">text_area</span><span class="p">(</span><span class="s2">&quot;Description (optionnel)&quot;</span><span class="p">,</span> <span class="n">placeholder</span><span class="o">=</span><span class="s2">&quot;Description...&quot;</span><span class="p">)</span>
+
+    <span class="n">submitted</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">form_submit_button</span><span class="p">(</span><span class="s2">&quot;Ajouter&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">submitted</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Le nom est obligatoire&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">value</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span> <span class="k">if</span> <span class="n">description</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="p">}</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">API_URL</span><span class="si">}</span><span class="s2">/data&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">:</span>
+                    <span class="n">st</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="s2">&quot;✅ Donnée ajoutée avec succès !&quot;</span><span class="p">)</span>
+                    <span class="n">st</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Erreur : </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">st</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+
+            <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ConnectionError</span><span class="p">:</span>
+                <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;❌ Impossible de se connecter à l&#39;API&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="page-de-lecture-pages-1-read-py">
+<h2>Page de Lecture (pages/1_read.py)<a class="headerlink" href="#page-de-lecture-pages-1-read-py" title="Lien vers cette rubrique"></a></h2>
+<p>Cette page affiche les données sous forme de tableau.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">streamlit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">API_URL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;API_URL&quot;</span><span class="p">,</span> <span class="s2">&quot;http://localhost:8000&quot;</span><span class="p">)</span>
+
+<span class="n">st</span><span class="o">.</span><span class="n">set_page_config</span><span class="p">(</span>
+    <span class="n">page_title</span><span class="o">=</span><span class="s2">&quot;Lecture des données&quot;</span><span class="p">,</span>
+    <span class="n">page_icon</span><span class="o">=</span><span class="s2">&quot;📊&quot;</span><span class="p">,</span>
+    <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;wide&quot;</span>
+<span class="p">)</span>
+
+<span class="n">st</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;📊 Lecture des Données&quot;</span><span class="p">)</span>
+
+<span class="c1"># Bouton de rafraîchissement</span>
+<span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">&quot;🔄 Rafraîchir&quot;</span><span class="p">):</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">rerun</span><span class="p">()</span>
+
+<span class="c1"># Récupération des données</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">API_URL</span><span class="si">}</span><span class="s2">/data&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+            <span class="n">st</span><span class="o">.</span><span class="n">dataframe</span><span class="p">(</span>
+                <span class="n">df</span><span class="p">,</span>
+                <span class="n">use_container_width</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">hide_index</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
+
+            <span class="n">st</span><span class="o">.</span><span class="n">metric</span><span class="p">(</span><span class="s2">&quot;Total&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Aucune donnée disponible&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Erreur : </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ConnectionError</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;❌ Impossible de se connecter à l&#39;API&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="communication-avec-l-api">
+<h2>Communication avec l’API<a class="headerlink" href="#communication-avec-l-api" title="Lien vers cette rubrique"></a></h2>
+<p>Le frontend communique avec le backend via HTTP/REST :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">API_URL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;API_URL&quot;</span><span class="p">,</span> <span class="s2">&quot;http://api:8000&quot;</span><span class="p">)</span>  <span class="c1"># Dans Docker</span>
+<span class="c1"># API_URL = &quot;http://localhost:8000&quot;  # En local</span>
+</pre></div>
+</div>
+<section id="operations-api">
+<h3>Opérations API<a class="headerlink" href="#operations-api" title="Lien vers cette rubrique"></a></h3>
+<p><strong>POST - Créer une donnée</strong> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Test&quot;</span><span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">API_URL</span><span class="si">}</span><span class="s2">/data&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">201</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># {&quot;id&quot;: 1, &quot;name&quot;: &quot;Alice&quot;, ...}</span>
+</pre></div>
+</div>
+<p><strong>GET - Récupérer les données</strong> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">API_URL</span><span class="si">}</span><span class="s2">/data&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="c1"># data est une liste de dictionnaires</span>
+</pre></div>
+</div>
+</section>
+<section id="gestion-des-erreurs">
+<h3>Gestion des Erreurs<a class="headerlink" href="#gestion-des-erreurs" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">API_URL</span><span class="si">}</span><span class="s2">/data&quot;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>  <span class="c1"># Lève une exception si 4xx/5xx</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ConnectionError</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Impossible de se connecter à l&#39;API&quot;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">Timeout</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;La requête a expiré&quot;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">HTTPError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Erreur HTTP : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="customisation-de-l-interface">
+<h2>Customisation de l’Interface<a class="headerlink" href="#customisation-de-l-interface" title="Lien vers cette rubrique"></a></h2>
+<section id="configuration-de-la-page">
+<h3>Configuration de la Page<a class="headerlink" href="#configuration-de-la-page" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">set_page_config</span><span class="p">(</span>
+    <span class="n">page_title</span><span class="o">=</span><span class="s2">&quot;Mon Application&quot;</span><span class="p">,</span>
+    <span class="n">page_icon</span><span class="o">=</span><span class="s2">&quot;🚀&quot;</span><span class="p">,</span>
+    <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;wide&quot;</span><span class="p">,</span>           <span class="c1"># ou &quot;centered&quot;</span>
+    <span class="n">initial_sidebar_state</span><span class="o">=</span><span class="s2">&quot;expanded&quot;</span>  <span class="c1"># ou &quot;collapsed&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="theme">
+<h3>Thème<a class="headerlink" href="#theme" title="Lien vers cette rubrique"></a></h3>
+<p>Créer un fichier <code class="docutils literal notranslate"><span class="pre">.streamlit/config.toml</span></code> :</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[theme]</span>
+<span class="n">primaryColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;#0066cc&quot;</span>
+<span class="n">backgroundColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;#ffffff&quot;</span>
+<span class="n">secondaryBackgroundColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;#f0f2f6&quot;</span>
+<span class="n">textColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;#262730&quot;</span>
+<span class="n">font</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;sans serif&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="widgets-streamlit">
+<h2>Widgets Streamlit<a class="headerlink" href="#widgets-streamlit" title="Lien vers cette rubrique"></a></h2>
+<section id="formulaires">
+<h3>Formulaires<a class="headerlink" href="#formulaires" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">st</span><span class="o">.</span><span class="n">form</span><span class="p">(</span><span class="s2">&quot;my_form&quot;</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">text_input</span><span class="p">(</span><span class="s2">&quot;Nom&quot;</span><span class="p">)</span>
+    <span class="n">age</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s2">&quot;Âge&quot;</span><span class="p">,</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">submitted</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">form_submit_button</span><span class="p">(</span><span class="s2">&quot;Soumettre&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">submitted</span><span class="p">:</span>
+        <span class="n">st</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bonjour </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2"> ans&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="tableaux-de-donnees">
+<h3>Tableaux de Données<a class="headerlink" href="#tableaux-de-donnees" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="o">...</span><span class="p">])</span>
+
+<span class="c1"># Tableau interactif</span>
+<span class="n">st</span><span class="o">.</span><span class="n">dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">use_container_width</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Tableau statique</span>
+<span class="n">st</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="metriques">
+<h3>Métriques<a class="headerlink" href="#metriques" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">metric</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Total&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="s2">&quot;+5&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="graphiques">
+<h3>Graphiques<a class="headerlink" href="#graphiques" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="n">st</span><span class="o">.</span><span class="n">line_chart</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">bar_chart</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">area_chart</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="messages">
+<h3>Messages<a class="headerlink" href="#messages" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="s2">&quot;✅ Succès !&quot;</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;❌ Erreur&quot;</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;⚠️ Attention&quot;</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;ℹ️ Information&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="etat-de-session">
+<h2>État de Session<a class="headerlink" href="#etat-de-session" title="Lien vers cette rubrique"></a></h2>
+<p>Streamlit maintient un état entre les reruns :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s2">&quot;counter&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">:</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s2">&quot;Incrémenter&quot;</span><span class="p">):</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compteur : </span><span class="si">{</span><span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="o">.</span><span class="n">counter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="deployment">
+<h2>Deployment<a class="headerlink" href="#deployment" title="Lien vers cette rubrique"></a></h2>
+<section id="variables-d-environnement">
+<h3>Variables d’Environnement<a class="headerlink" href="#variables-d-environnement" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dans .env</span>
+<span class="nv">API_URL</span><span class="o">=</span>http://api:8000
+<span class="nv">STREAMLIT_PORT</span><span class="o">=</span><span class="m">8501</span>
+</pre></div>
+</div>
+</section>
+<section id="configuration-docker">
+<h3>Configuration Docker<a class="headerlink" href="#configuration-docker" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-dockerfile notranslate"><div class="highlight"><pre><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.11-slim</span>
+
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>ghcr.io/astral-sh/uv:latest<span class="w"> </span>/uv<span class="w"> </span>/usr/local/bin/uv
+
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="k">COPY</span><span class="w"> </span>pyproject.toml<span class="w"> </span>uv.lock<span class="w"> </span>./
+<span class="k">RUN</span><span class="w"> </span>uv<span class="w"> </span>sync<span class="w"> </span>--frozen<span class="w"> </span>--no-dev
+
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">8501</span>
+
+<span class="k">CMD</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;uv&quot;</span>,<span class="w"> </span><span class="s2">&quot;run&quot;</span>,<span class="w"> </span><span class="s2">&quot;streamlit&quot;</span>,<span class="w"> </span><span class="s2">&quot;run&quot;</span>,<span class="w"> </span><span class="s2">&quot;main.py&quot;</span>,<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span><span class="s2">&quot;--server.port&quot;</span>,<span class="w"> </span><span class="s2">&quot;8501&quot;</span>,<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span><span class="s2">&quot;--server.address&quot;</span>,<span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="o">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="prochaines-sections">
+<h2>Prochaines Sections<a class="headerlink" href="#prochaines-sections" title="Lien vers cette rubrique"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="database.html"><span class="doc">Base de Données</span></a> : Schéma de la base de données</p></li>
+<li><p><a class="reference internal" href="../testing/tests.html"><span class="doc">Tests</span></a> : Tests du frontend</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="backend.html" class="btn btn-neutral float-left" title="Backend (FastAPI)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="database.html" class="btn btn-neutral float-right" title="Base de Données" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2026, Simplon France.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

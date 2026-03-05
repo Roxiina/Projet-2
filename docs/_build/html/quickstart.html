@@ -1,0 +1,781 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Démarrage Rapide &mdash; Documentation Projet 2 - Orchestration et Livraison Continue 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=05dadb3a"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/translations.js?v=e6b791cb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="Projet 2 - Orchestration et Livraison Continue" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Projet 2 - Orchestration et Livraison Continue
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">📚 Démarrage</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Démarrage Rapide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequis">Prérequis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-de-uv">Installation de uv</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#windows-powershell">Windows (PowerShell)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linux-macos">Linux/macOS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#etape-1-cloner-le-projet">Étape 1 : Cloner le projet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#etape-2-configuration">Étape 2 : Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#etape-3-lancer-l-application">Étape 3 : Lancer l’application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mode-developpement">Mode Développement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mode-production">Mode Production</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#etape-4-acceder-aux-services">Étape 4 : Accéder aux services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#verification">Vérification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tester-l-api">Tester l’API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tests">Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#arret-de-l-application">Arrêt de l’application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prochaines-etapes">Prochaines étapes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prerequis-systeme">Prérequis Système</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#logiciels-obligatoires">Logiciels Obligatoires</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#logiciels-optionnels">Logiciels Optionnels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#verification-des-prerequis">Vérification des prérequis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-de-uv">Installation de uv</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#linux-macos">Linux/macOS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#clonage-du-projet">Clonage du Projet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-des-dependances">Installation des Dépendances</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#backend-api-fastapi">Backend (API FastAPI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#frontend-streamlit">Frontend (Streamlit)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#documentation-sphinx">Documentation (Sphinx)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#variables-d-environnement">Variables d’Environnement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#base-de-donnees">Base de Données</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#build-des-images-docker">Build des Images Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#lancement">Lancement</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#mode-developpement">Mode Développement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#mode-detache-background">Mode Détaché (Background)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#verification">Vérification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#sante-des-services">Santé des Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#test-de-l-api">Test de l’API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#test-du-frontend">Test du Frontend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#developpement-local-sans-docker">Développement Local (Sans Docker)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#frontend">Frontend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#depannage">Dépannage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#docker-desktop-n-est-pas-demarre">Docker Desktop n’est pas démarré</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#port-deja-utilise">Port déjà utilisé</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#uv-non-trouve">uv non trouvé</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#prochaines-etapes">Prochaines Étapes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#variables-d-environnement">Variables d’Environnement</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#fichier-env-principal">Fichier .env Principal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#configuration-par-service">Configuration par Service</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#api-fastapi">API FastAPI</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configuration.html#configuration-ruff-linting">Configuration Ruff (Linting)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configuration.html#configuration-pytest">Configuration Pytest</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#frontend-streamlit">Frontend Streamlit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configuration.html#configuration-streamlit">Configuration Streamlit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#base-de-donnees">Base de Données</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#postgresql-production">PostgreSQL (Production)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#sqlite-developpement-tests">SQLite (Développement/Tests)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#docker">Docker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#dockerfile-api">Dockerfile API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#docker-compose">Docker Compose</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configuration.html#health-checks">Health Checks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#github-actions">GitHub Actions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#configuration-ci-cd">Configuration CI/CD</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configuration.html#secrets-requis">Secrets Requis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#gitleaks">Gitleaks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#ide-configuration">IDE Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#vs-code">VS Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#pycharm">PyCharm</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#configuration-de-production">Configuration de Production</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🏗️ Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture/overview.html">Vue d’Ensemble</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="architecture/overview.html#id1">Vue d’Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/overview.html#diagramme-d-architecture">Diagramme d’Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/overview.html#flux-de-donnees">Flux de Données</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/overview.html#isolation-reseau">Isolation Réseau</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/overview.html#front-api">front-api</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/overview.html#api-db">api-db</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/overview.html#gestion-de-la-persistance">Gestion de la Persistance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/overview.html#volume-docker">Volume Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/overview.html#health-checks">Health Checks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/overview.html#api-health-check">API Health Check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/overview.html#database-health-check">Database Health Check</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/overview.html#dependances-entre-services">Dépendances entre Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/overview.html#scalabilite">Scalabilité</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/overview.html#securite">Sécurité</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/overview.html#bonnes-pratiques-implementees">Bonnes Pratiques Implémentées</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/overview.html#ameliorations-possibles">Améliorations Possibles</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/overview.html#technologies-utilisees">Technologies Utilisées</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/overview.html#backend">Backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/overview.html#frontend">Frontend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/overview.html#database">Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/overview.html#devops">DevOps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/overview.html#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture/backend.html">Backend (FastAPI)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="architecture/backend.html#structure-du-backend">Structure du Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/backend.html#endpoints-api">Endpoints API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/backend.html#route-racine">Route Racine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/backend.html#health-check">Health Check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/backend.html#creer-une-donnee">Créer une Donnée</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/backend.html#recuperer-des-donnees">Récupérer des Données</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/backend.html#recuperer-une-donnee-par-id">Récupérer une Donnée par ID</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/backend.html#modeles-de-donnees">Modèles de Données</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/backend.html#pydantic-models-validation">Pydantic Models (Validation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/backend.html#sqlalchemy-models-base-de-donnees">SQLAlchemy Models (Base de données)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/backend.html#operations-crud">Opérations CRUD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/backend.html#create">Create</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/backend.html#read">Read</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/backend.html#gestion-de-la-base-de-donnees">Gestion de la Base de Données</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/backend.html#connexion">Connexion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/backend.html#dependency-injection">Dependency Injection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/backend.html#initialisation">Initialisation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/backend.html#modules-mathematiques">Modules Mathématiques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/backend.html#gestion-des-erreurs">Gestion des Erreurs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/backend.html#validation-pydantic">Validation Pydantic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/backend.html#exceptions-http">Exceptions HTTP</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/backend.html#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/backend.html#variables-d-environnement">Variables d’Environnement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/backend.html#cors">CORS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/backend.html#documentation-auto-generee">Documentation Auto-générée</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/backend.html#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture/frontend.html">Frontend (Streamlit)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="architecture/frontend.html#structure-du-frontend">Structure du Frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/frontend.html#architecture-multi-pages">Architecture Multi-Pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/frontend.html#page-d-accueil-main-py">Page d’Accueil (main.py)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/frontend.html#page-d-insertion-pages-0-insert-py">Page d’Insertion (pages/0_insert.py)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/frontend.html#page-de-lecture-pages-1-read-py">Page de Lecture (pages/1_read.py)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/frontend.html#communication-avec-l-api">Communication avec l’API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/frontend.html#operations-api">Opérations API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/frontend.html#gestion-des-erreurs">Gestion des Erreurs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/frontend.html#customisation-de-l-interface">Customisation de l’Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/frontend.html#configuration-de-la-page">Configuration de la Page</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/frontend.html#theme">Thème</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/frontend.html#widgets-streamlit">Widgets Streamlit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/frontend.html#formulaires">Formulaires</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/frontend.html#tableaux-de-donnees">Tableaux de Données</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/frontend.html#metriques">Métriques</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/frontend.html#graphiques">Graphiques</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/frontend.html#messages">Messages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/frontend.html#etat-de-session">État de Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/frontend.html#deployment">Deployment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/frontend.html#variables-d-environnement">Variables d’Environnement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/frontend.html#configuration-docker">Configuration Docker</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/frontend.html#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture/database.html">Base de Données</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="architecture/database.html#technologie">Technologie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/database.html#schema-de-donnees">Schéma de Données</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#table-data">Table: data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="architecture/database.html#colonnes">Colonnes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/database.html#modele-sqlalchemy">Modèle SQLAlchemy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#index">Index</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/database.html#connexion-a-la-base">Connexion à la Base</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#configuration">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#pool-de-connexions">Pool de Connexions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#dependency-injection">Dependency Injection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/database.html#initialisation">Initialisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/database.html#operations-crud">Opérations CRUD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#create">Create</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#read">Read</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#update">Update</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#delete">Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/database.html#configuration-docker">Configuration Docker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#docker-compose-yml">docker-compose.yml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#persistance">Persistance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/database.html#variables-d-environnement">Variables d’Environnement</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#fichier-env">Fichier .env</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/database.html#tests">Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#sqlite-pour-les-tests">SQLite pour les Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/database.html#migration-de-schema">Migration de Schéma</a></li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/database.html#backup-et-restauration">Backup et Restauration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#backup">Backup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#restauration">Restauration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/database.html#monitoring">Monitoring</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#id1">Connexion à la Base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#logs-postgresql">Logs PostgreSQL</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/database.html#optimisation">Optimisation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#id2">Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture/database.html#id3">Pool de Connexions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="architecture/database.html#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🧪 Tests et Qualité</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="testing/tests.html">Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing/tests.html#vue-d-ensemble">Vue d’Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing/tests.html#structure-des-tests">Structure des Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing/tests.html#lancer-les-tests">Lancer les Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/tests.html#commande-de-base">Commande de Base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/tests.html#options-utiles">Options Utiles</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/tests.html#tests-de-l-api">Tests de l’API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/tests.html#fichier-tests-test-api-py">Fichier: tests/test_api.py</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="testing/tests.html#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="testing/tests.html#tests-implementes">Tests Implémentés</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/tests.html#tests-des-fonctions-math">Tests des Fonctions Math</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/tests.html#fichier-tests-test-math-csv-py">Fichier: tests/test_math_csv.py</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="testing/tests.html#id1">Tests Implémentés</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/tests.html#couverture-de-code">Couverture de Code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/tests.html#generer-un-rapport-de-couverture">Générer un Rapport de Couverture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/tests.html#resultats-actuels">Résultats Actuels</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/tests.html#configuration-pytest">Configuration pytest</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/tests.html#fichier-conftest-py">Fichier conftest.py</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/tests.html#ci-cd">CI/CD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/tests.html#github-actions">GitHub Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/tests.html#badges">Badges</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/tests.html#bonnes-pratiques">Bonnes Pratiques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing/tests.html#depannage">Dépannage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/tests.html#import-errors">Import Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/tests.html#database-errors">Database Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/tests.html#test-isolation">Test Isolation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/tests.html#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing/coverage.html">Couverture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing/coverage.html#vue-d-ensemble">Vue d’Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing/coverage.html#rapport-detaille">Rapport Détaillé</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/coverage.html#par-fichier">Par Fichier</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/coverage.html#generation-des-rapports">Génération des Rapports</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/coverage.html#terminal">Terminal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/coverage.html#html">HTML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/coverage.html#xml-pour-ci-cd">XML (pour CI/CD)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/coverage.html#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/coverage.html#pyproject-toml">pyproject.toml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/coverage.html#fichier-coveragerc">Fichier .coveragerc</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/coverage.html#ameliorer-la-couverture">Améliorer la Couverture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/coverage.html#identifier-les-lignes-manquees">Identifier les Lignes Manquées</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/coverage.html#ajouter-des-tests">Ajouter des Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/coverage.html#bonnes-pratiques">Bonnes Pratiques</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/coverage.html#objectifs-de-couverture">Objectifs de Couverture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/coverage.html#tests-de-qualite">Tests de Qualité</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/coverage.html#ci-cd-integration">CI/CD Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/coverage.html#github-actions">GitHub Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/coverage.html#badge-de-couverture">Badge de Couverture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/coverage.html#codecov">Codecov</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/coverage.html#metriques-de-qualite">Métriques de Qualité</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/coverage.html#en-plus-de-la-couverture">En Plus de la Couverture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/coverage.html#outils-complementaires">Outils Complémentaires</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/coverage.html#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing/linting.html">Linting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing/linting.html#vue-d-ensemble">Vue d’Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing/linting.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing/linting.html#utilisation">Utilisation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/linting.html#id1">Linting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/linting.html#formatting">Formatting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/linting.html#fix-automatique">Fix Automatique</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/linting.html#mode-watch">Mode Watch</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/linting.html#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/linting.html#fichier-pyproject-toml">Fichier: pyproject.toml</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="testing/linting.html#options">Options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/linting.html#regles-activees">Règles Activées</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/linting.html#categories">Catégories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/linting.html#exemples-de-regles">Exemples de Règles</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/linting.html#regles-ignorees">Règles Ignorées</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/linting.html#n806">N806</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/linting.html#correction-des-erreurs">Correction des Erreurs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/linting.html#workflow-typique">Workflow Typique</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/linting.html#exemples-de-corrections">Exemples de Corrections</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/linting.html#ci-cd">CI/CD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/linting.html#github-actions">GitHub Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/linting.html#pre-commit-hook">Pre-commit Hook</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/linting.html#integration-ide">Intégration IDE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/linting.html#vs-code">VS Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/linting.html#pycharm">PyCharm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing/linting.html#vim-neovim">Vim/Neovim</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/linting.html#comparaison-avec-autres-outils">Comparaison avec Autres Outils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing/linting.html#bonnes-pratiques">Bonnes Pratiques</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testing/linting.html#a-eviter">À Éviter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing/linting.html#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">🚀 Déploiement</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="deployment/docker.html">Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deployment/docker.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/docker.html#architecture-docker">Architecture Docker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#trois-services">Trois Services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/docker.html#images-docker">Images Docker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#api-fastapi">API (FastAPI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#frontend-streamlit">Frontend (Streamlit)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/docker.html#docker-compose">Docker Compose</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#fichier-de-developpement">Fichier de Développement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#fichier-de-production">Fichier de Production</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/docker.html#commandes-docker-compose">Commandes Docker Compose</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#developpement">Développement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#production">Production</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#logs">Logs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#sante-des-services">Santé des Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#rebuild">Rebuild</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/docker.html#health-checks">Health Checks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#api">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#database">Database</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/docker.html#reseaux">Réseaux</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#isolation">Isolation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/docker.html#volumes">Volumes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#persistance-des-donnees">Persistance des Données</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#inspection">Inspection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#backup">Backup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/docker.html#optimisations">Optimisations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#multi-stage-build">Multi-stage Build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#dockerignore">.dockerignore</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/docker.html#depannage">Dépannage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#port-deja-utilise">Port Déjà Utilisé</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#service-unhealthy">Service Unhealthy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deployment/docker.html#build-lent">Build Lent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/docker.html#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deployment/cicd.html">CI/CD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deployment/cicd.html#vue-d-ensemble">Vue d’Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/cicd.html#workflows">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/cicd.html#workflow-ci">Workflow CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/cicd.html#workflow-security">Workflow Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/cicd.html#workflow-cd">Workflow CD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/cicd.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/cicd.html#badges">Badges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/cicd.html#prochaines-sections">Prochaines Sections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deployment/production.html">Production</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deployment/production.html#prerequis">Prérequis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/production.html#deploiement">Déploiement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/production.html#securite">Sécurité</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/production.html#monitoring">Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/production.html#backup">Backup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deployment/secrets.html">Secrets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deployment/secrets.html#configuration-dockerhub">Configuration DockerHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment/secrets.html#documentation-complete">Documentation Complète</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📖 Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guides/contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/contributing.html#comment-contribuer">Comment Contribuer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/contributing.html#standards-de-code">Standards de Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/contributing.html#tests">Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/contributing.html#linting">Linting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guides/troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/troubleshooting.html#docker-desktop-n-est-pas-demarre">Docker Desktop n’est pas démarré</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/troubleshooting.html#port-deja-utilise">Port déjà utilisé</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/troubleshooting.html#tests-echouent">Tests échouent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/troubleshooting.html#service-unhealthy">Service unhealthy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guides/checklist.html">Checklist</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/checklist.html#fonctionnalites">Fonctionnalités</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/checklist.html#tests">Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/checklist.html#deploiement">Déploiement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/checklist.html#documentation">Documentation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">📋 Livrables</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="deliverables/overview.html">Vue d’Ensemble</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deliverables/overview.html#livrable-1-github-avec-badges">Livrable 1 : GitHub avec Badges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deliverables/overview.html#livrable-2-docker-compose-prod-yml">Livrable 2 : docker-compose.prod.yml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deliverables/overview.html#livrable-3-gitleaks-actif">Livrable 3 : Gitleaks Actif</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deliverables/technical.html">Aspects Techniques</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="deliverables/technical.html#architecture">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deliverables/technical.html#reseaux-docker">Réseaux Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deliverables/technical.html#health-checks">Health Checks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deliverables/technical.html#tests">Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deliverables/technical.html#qualite-du-code">Qualité du Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deliverables/technical.html#securite">Sécurité</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Projet 2 - Orchestration et Livraison Continue</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Démarrage Rapide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/quickstart.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="demarrage-rapide">
+<h1>Démarrage Rapide<a class="headerlink" href="#demarrage-rapide" title="Lien vers cette rubrique"></a></h1>
+<p>Ce guide vous permet de lancer rapidement l’application en quelques minutes.</p>
+<section id="prerequis">
+<h2>Prérequis<a class="headerlink" href="#prerequis" title="Lien vers cette rubrique"></a></h2>
+<ul class="simple">
+<li><p>Docker Desktop installé et démarré</p></li>
+<li><p>Git</p></li>
+<li><p>Python 3.11+ (pour le développement)</p></li>
+<li><p>uv (gestionnaire de paquets Python)</p></li>
+</ul>
+</section>
+<section id="installation-de-uv">
+<h2>Installation de uv<a class="headerlink" href="#installation-de-uv" title="Lien vers cette rubrique"></a></h2>
+<section id="windows-powershell">
+<h3>Windows (PowerShell)<a class="headerlink" href="#windows-powershell" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">irm </span><span class="n">https</span><span class="p">://</span><span class="n">astral</span><span class="p">.</span><span class="n">sh</span><span class="p">/</span><span class="n">uv</span><span class="p">/</span><span class="n">install</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">iex</span>
+</pre></div>
+</div>
+</section>
+<section id="linux-macos">
+<h3>Linux/macOS<a class="headerlink" href="#linux-macos" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-LsSf<span class="w"> </span>https://astral.sh/uv/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</pre></div>
+</div>
+</section>
+</section>
+<section id="etape-1-cloner-le-projet">
+<h2>Étape 1 : Cloner le projet<a class="headerlink" href="#etape-1-cloner-le-projet" title="Lien vers cette rubrique"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Roxiina/Projet-2.git
+<span class="nb">cd</span><span class="w"> </span>Projet-2
+</pre></div>
+</div>
+</section>
+<section id="etape-2-configuration">
+<h2>Étape 2 : Configuration<a class="headerlink" href="#etape-2-configuration" title="Lien vers cette rubrique"></a></h2>
+<p>Créer le fichier d’environnement :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+</pre></div>
+</div>
+<p>Le fichier <code class="docutils literal notranslate"><span class="pre">.env</span></code> contient :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># PostgreSQL</span>
+<span class="nv">POSTGRES_DB</span><span class="o">=</span>projet2_db
+<span class="nv">POSTGRES_USER</span><span class="o">=</span>projet2_user
+<span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>projet2_password
+
+<span class="c1"># API</span>
+<span class="nv">DATABASE_URL</span><span class="o">=</span>postgresql://projet2_user:projet2_password@db:5432/projet2_db
+<span class="nv">API_URL</span><span class="o">=</span>http://api:8000
+</pre></div>
+</div>
+</section>
+<section id="etape-3-lancer-l-application">
+<h2>Étape 3 : Lancer l’application<a class="headerlink" href="#etape-3-lancer-l-application" title="Lien vers cette rubrique"></a></h2>
+<section id="mode-developpement">
+<h3>Mode Développement<a class="headerlink" href="#mode-developpement" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose<span class="w"> </span>up<span class="w"> </span>--build
+</pre></div>
+</div>
+</section>
+<section id="mode-production">
+<h3>Mode Production<a class="headerlink" href="#mode-production" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.prod.yml<span class="w"> </span>up<span class="w"> </span>-d
+</pre></div>
+</div>
+</section>
+</section>
+<section id="etape-4-acceder-aux-services">
+<h2>Étape 4 : Accéder aux services<a class="headerlink" href="#etape-4-acceder-aux-services" title="Lien vers cette rubrique"></a></h2>
+<p>Une fois tous les conteneurs démarrés (statut <code class="docutils literal notranslate"><span class="pre">healthy</span></code>) :</p>
+<ul class="simple">
+<li><p><strong>Frontend Streamlit</strong> : <a class="reference external" href="http://localhost:8501">http://localhost:8501</a></p></li>
+<li><p><strong>API FastAPI</strong> : <a class="reference external" href="http://localhost:8000">http://localhost:8000</a></p></li>
+<li><p><strong>Documentation API</strong> : <a class="reference external" href="http://localhost:8000/docs">http://localhost:8000/docs</a></p></li>
+</ul>
+</section>
+<section id="verification">
+<h2>Vérification<a class="headerlink" href="#verification" title="Lien vers cette rubrique"></a></h2>
+<p>Vérifier que tous les services sont en cours d’exécution :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose<span class="w"> </span>ps
+</pre></div>
+</div>
+<p>Tous les conteneurs doivent avoir le statut <code class="docutils literal notranslate"><span class="pre">healthy</span></code>.</p>
+<section id="tester-l-api">
+<h3>Tester l’API<a class="headerlink" href="#tester-l-api" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>http://localhost:8000/health
+</pre></div>
+</div>
+<p>Réponse attendue :</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;healthy&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="tests">
+<h2>Tests<a class="headerlink" href="#tests" title="Lien vers cette rubrique"></a></h2>
+<p>Lancer les tests unitaires :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>run<span class="w"> </span>--directory<span class="w"> </span>./app_api<span class="w"> </span>pytest<span class="w"> </span>../tests/<span class="w"> </span>-v
+</pre></div>
+</div>
+<p>Résultat attendu : <strong>14 tests passed</strong> ✅</p>
+</section>
+<section id="arret-de-l-application">
+<h2>Arrêt de l’application<a class="headerlink" href="#arret-de-l-application" title="Lien vers cette rubrique"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose<span class="w"> </span>down
+</pre></div>
+</div>
+<p>Pour supprimer aussi les volumes (données) :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker-compose<span class="w"> </span>down<span class="w"> </span>-v
+</pre></div>
+</div>
+</section>
+<section id="prochaines-etapes">
+<h2>Prochaines étapes<a class="headerlink" href="#prochaines-etapes" title="Lien vers cette rubrique"></a></h2>
+<ul class="simple">
+<li><p>Consultez la <a class="reference internal" href="installation.html"><span class="doc">Installation</span></a> pour une installation détaillée</p></li>
+<li><p>Lisez le guide <a class="reference internal" href="architecture/overview.html"><span class="doc">Vue d’Ensemble</span></a> pour comprendre l’architecture</p></li>
+<li><p>Explorez les <a class="reference internal" href="testing/tests.html"><span class="doc">Tests</span></a> pour les tests et la qualité du code</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="index.html" class="btn btn-neutral float-left" title="Projet 2 - Orchestration et Livraison Continue" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2026, Simplon France.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
