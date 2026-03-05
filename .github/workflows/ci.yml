@@ -1,0 +1,89 @@
+name: CI Standardisation Projet 2
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  lint-and-test:
+    name: Linting et Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+      
+    - name: Configuration Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Installation de uv
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+    
+    - name: Installation des dépendances de l'API
+      working-directory: ./app_api
+      run: |
+        uv sync
+    
+    - name: Linting avec Ruff (API)
+      working-directory: ./app_api
+      run: |
+        uv run ruff check .
+    
+    - name: Tests avec Pytest (API)
+      working-directory: ./app_api
+      run: |
+        uv run pytest tests/ -v --cov=. --cov-report=xml --cov-report=term
+    
+    - name: Upload de la couverture
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./app_api/coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
+    
+    - name: Installation des dépendances du Frontend
+      working-directory: ./app_front
+      run: |
+        uv sync
+    
+    - name: Linting avec Ruff (Frontend)
+      working-directory: ./app_front
+      run: |
+        uv run ruff check .
+
+  build-test:
+    name: Test de Build Docker
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: Build API Image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./app_api
+        push: false
+        tags: app-api:test
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+    
+    - name: Build Frontend Image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./app_front
+        push: false
+        tags: app-front:test
+        cache-from: type=gha
+        cache-to: type=gha,mode=max

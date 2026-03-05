@@ -1,0 +1,150 @@
+"""Tests pour l'API FastAPI."""
+import pytest
+from fastapi.testclient import TestClient
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+import sys
+from pathlib import Path
+
+# Ajouter le chemin de l'API au PYTHONPATH
+api_path = Path(__file__).parent.parent
+sys.path.insert(0, str(api_path))
+
+from main import app
+from modules.connect import Base, get_session
+
+# Base de données de test en mémoire
+SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
+
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL,
+    connect_args={"check_same_thread": False}
+)
+TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+
+def override_get_session():
+    """Override de la session de base de données pour les tests."""
+    try:
+        db = TestingSessionLocal()
+        yield db
+    finally:
+        db.close()
+
+
+app.dependency_overrides[get_session] = override_get_session
+
+# Créer les tables
+Base.metadata.create_all(bind=engine)
+
+client = TestClient(app)
+
+
+def test_read_root():
+    """Test de la route racine."""
+    response = client.get("/")
+    assert response.status_code == 200
+    assert "message" in response.json()
+    assert "version" in response.json()
+
+
+def test_health_check():
+    """Test du health check."""
+    response = client.get("/health")
+    assert response.status_code == 200
+    assert response.json() == {"status": "healthy", "service": "api"}
+
+
+def test_create_data():
+    """Test de la création de données."""
+    data = {
+        "value": 42.5,
+        "description": "Test data"
+    }
+    response = client.post("/data", json=data)
+    assert response.status_code == 201
+    response_data = response.json()
+    assert response_data["value"] == 42.5
+    assert response_data["description"] == "Test data"
+    assert "id" in response_data
+    assert "created_at" in response_data
+
+
+def test_create_data_without_description():
+    """Test de la création de données sans description."""
+    data = {
+        "value": 100.0
+    }
+    response = client.post("/data", json=data)
+    assert response.status_code == 201
+    response_data = response.json()
+    assert response_data["value"] == 100.0
+    assert response_data["description"] is None
+
+
+def test_get_all_data():
+    """Test de la récupération de toutes les données."""
+    # Créer quelques données de test
+    client.post("/data", json={"value": 10.0, "description": "First"})
+    client.post("/data", json={"value": 20.0, "description": "Second"})
+    
+    response = client.get("/data")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    assert len(data) >= 2
+
+
+def test_get_data_by_id():
+    """Test de la récupération d'une donnée par ID."""
+    # Créer une donnée
+    create_response = client.post(
+        "/data",
+        json={"value": 50.0, "description": "Test by ID"}
+    )
+    created_id = create_response.json()["id"]
+    
+    # Récupérer par ID
+    response = client.get(f"/data/{created_id}")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["id"] == created_id
+    assert data["value"] == 50.0
+    assert data["description"] == "Test by ID"
+
+
+def test_get_nonexistent_data():
+    """Test de la récupération d'une donnée inexistante."""
+    response = client.get("/data/99999")
+    assert response.status_code == 404
+    assert response.json()["detail"] == "Donnée non trouvée"
+
+
+def test_create_data_invalid():
+    """Test de la création de données avec des données invalides."""
+    # Valeur manquante
+    response = client.post("/data", json={"description": "No value"})
+    assert response.status_code == 422  # Unprocessable Entity
+    
+    # Type incorrect
+    response = client.post("/data", json={"value": "not a number"})
+    assert response.status_code == 422
+
+
+def test_pagination():
+    """Test de la pagination."""
+    # Créer plusieurs données
+    for i in range(10):
+        client.post("/data", json={"value": float(i), "description": f"Data {i}"})
+    
+    # Test avec limit
+    response = client.get("/data?limit=5")
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) <= 5
+    
+    # Test avec skip et limit
+    response = client.get("/data?skip=5&limit=5")
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) <= 5

@@ -1,0 +1,67 @@
+# Gitleaks Configuration
+# https://github.com/gitleaks/gitleaks
+
+title = "Gitleaks Configuration for Projet 2"
+
+# Règles personnalisées
+[[rules]]
+description = "Generic API Key"
+id = "generic-api-key"
+regex = '''(?i)(api[_-]?key|apikey)[^a-zA-Z0-9]*[=:][^a-zA-Z0-9]*['"]?([a-zA-Z0-9_\-]{20,})['"]?'''
+tags = ["key", "API"]
+
+[[rules]]
+description = "Generic Secret"
+id = "generic-secret"
+regex = '''(?i)(secret|password|passwd|pwd)[^a-zA-Z0-9]*[=:][^a-zA-Z0-9]*['"]?([a-zA-Z0-9_\-]{8,})['"]?'''
+tags = ["key", "secret"]
+
+[[rules]]
+description = "PostgreSQL Connection String"
+id = "postgres-connection-string"
+regex = '''postgresql:\/\/[^:]+:[^@]+@[^\/]+\/\w+'''
+tags = ["connection-string", "postgres"]
+
+[[rules]]
+description = "Docker Hub Token"
+id = "docker-hub-token"
+regex = '''dckr_pat_[a-zA-Z0-9_-]{20,}'''
+tags = ["docker", "token"]
+
+[[rules]]
+description = "GitHub Token"
+id = "github-token"
+regex = '''gh[pousr]_[A-Za-z0-9_]{36,}'''
+tags = ["github", "token"]
+
+# Allowlist - Fichiers à ignorer
+[allowlist]
+description = "Allowlisted files"
+files = [
+    '''^\.env\.example$''',
+    '''README\.md$''',
+    '''QUICKSTART\.md$''',
+    '''\.github/workflows/.*\.yml$'''
+]
+
+# Allowlist - Patterns à ignorer
+regexes = [
+    '''(?i)(example|sample|test|demo)''',
+    '''your_db_user''',
+    '''your_db_password''',
+    '''VOTRE_USERNAME''',
+    '''DOCKERHUB_USERNAME''',
+]
+
+# Allowlist - Commits à ignorer (si besoin)
+commits = []
+
+# Allowlist - Stopwords
+stopwords = [
+    "example",
+    "sample",
+    "test",
+    "demo",
+    "placeholder",
+    "your_",
+]
