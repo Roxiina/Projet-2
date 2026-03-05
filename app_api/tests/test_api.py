@@ -1,6 +1,5 @@
 """Tests pour l'API FastAPI."""
 
-import os
 import sys
 from pathlib import Path
 
@@ -14,14 +13,20 @@ api_path = Path(__file__).parent.parent
 sys.path.insert(0, str(api_path))
 
 from main import app
-from modules.connect import Base, DataModel, get_session
+from modules.connect import Base, get_session
 
 # Base de données de test en mémoire
 # Utiliser file-based SQLite au lieu de :memory: pour éviter les problèmes de connexions multiples
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test_db.sqlite"
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}, echo=False)
-TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL,
+    connect_args={"check_same_thread": False},
+    echo=False,
+)
+TestingSessionLocal = sessionmaker(
+    autocommit=False, autoflush=False, bind=engine
+)
 
 
 def override_get_session():
