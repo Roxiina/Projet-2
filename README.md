@@ -1,8 +1,8 @@
 # Projet 2 : Orchestration, Sécurité et Livraison Continue
 
-[![CI](https://github.com/VOTRE_USERNAME/VOTRE_REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/VOTRE_USERNAME/VOTRE_REPO/actions/workflows/ci.yml)
-[![Security](https://github.com/VOTRE_USERNAME/VOTRE_REPO/actions/workflows/security.yml/badge.svg)](https://github.com/VOTRE_USERNAME/VOTRE_REPO/actions/workflows/security.yml)
-[![CD](https://github.com/VOTRE_USERNAME/VOTRE_REPO/actions/workflows/cd.yml/badge.svg)](https://github.com/VOTRE_USERNAME/VOTRE_REPO/actions/workflows/cd.yml)
+[![CI](https://github.com/Roxiina/Projet-2/actions/workflows/ci.yml/badge.svg)](https://github.com/Roxiina/Projet-2/actions/workflows/ci.yml)
+[![Security](https://github.com/Roxiina/Projet-2/actions/workflows/security.yml/badge.svg)](https://github.com/Roxiina/Projet-2/actions/workflows/security.yml)
+[![CD](https://github.com/Roxiina/Projet-2/actions/workflows/cd.yml/badge.svg)](https://github.com/Roxiina/Projet-2/actions/workflows/cd.yml)
 
 Application complète de gestion de données avec architecture micro-services, orchestration Docker et CI/CD.
 
