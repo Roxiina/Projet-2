@@ -6,7 +6,6 @@ sous différents formats (tableau, cartes, détails).
 
 import os
 from datetime import datetime
-from typing import Any, Dict, List
 
 import pandas as pd
 import requests
