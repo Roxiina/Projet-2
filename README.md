@@ -7,7 +7,7 @@
 
 Application complète de gestion de données avec architecture micro-services, orchestration Docker et CI/CD.
 
-> 🚀 **Vous voulez juste tester rapidement ?** → Consultez le [**Guide de démarrage rapide (2 min)**](QUICKSTART.md)
+> 🚀 **Vous voulez juste tester rapidement ?** → Consultez le [**Guide de démarrage rapide (2 min)**](https://roxiina.github.io/Projet-2/quickstart.html)
 
 ## 📖 Documentation
 
@@ -122,6 +122,9 @@ irm https://astral.sh/uv/install.ps1 | iex
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
+
+> **Note** : Un fichier `requirements.txt` est disponible à la racine pour une installation globale avec pip, 
+> mais il est recommandé d'utiliser `uv` avec les `pyproject.toml` de chaque service pour le développement.
 
 ### Commandes utiles
 

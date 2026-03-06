@@ -1,0 +1,26 @@
+# Requirements pour le projet (installation locale sans Docker)
+# Pour le développement, utilisez plutôt uv avec les pyproject.toml de chaque service
+
+# Backend (API)
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.9
+python-dotenv>=1.0.0
+pydantic>=2.5.0
+
+# Frontend
+streamlit>=1.28.0
+requests>=2.31.0
+pandas>=2.1.0
+
+# Tests et Qualité
+pytest>=7.4.0
+pytest-cov>=4.1.0
+httpx>=0.25.0
+ruff>=0.1.0
+
+# Documentation
+sphinx>=7.2.0
+sphinx-rtd-theme>=2.0.0
+sphinx-autodoc-typehints>=1.25.0
