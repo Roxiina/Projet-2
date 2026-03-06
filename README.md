@@ -119,13 +119,67 @@ cd app_front && uv run ruff check .
 
 ```
 .
-├── docs/                  # 📚 Documentation Sphinx
-├── .github/workflows/     # CI/CD pipelines
-├── tests/                 # Tests unitaires et d'intégration
-├── app_api/              # Backend FastAPI
-├── app_front/            # Frontend Streamlit
-├── docker-compose.yml    # Orchestration development
-└── docker-compose.prod.yml # Orchestration production
+├── 📚 docs/                      # Documentation Sphinx
+│   ├── _build/html/             # Documentation HTML générée
+│   ├── architecture/            # Architecture microservices
+│   ├── deployment/              # Guides déploiement
+│   ├── guides/                  # Guides contribution
+│   ├── testing/                 # Documentation tests
+│   ├── conf.py                  # Configuration Sphinx
+│   └── requirements.txt         # Dépendances doc
+│
+├── 🔧 .github/                  # Configuration GitHub
+│   ├── workflows/               # CI/CD pipelines
+│   │   ├── ci.yml              # Tests & Linting
+│   │   ├── security.yml        # Gitleaks scan
+│   │   ├── cd.yml              # Docker build & push
+│   │   └── docs.yml            # Déploiement GitHub Pages
+│   ├── CONTRIBUTING.md          # Guide contribution
+│   └── CODE_OF_CONDUCT.md       # Code de conduite
+│
+├── 🧪 tests/                    # Tests unitaires & intégration
+│   ├── test_api.py             # Tests API (9 tests)
+│   └── test_math_csv.py        # Tests modules maths (5 tests)
+│
+├── 🔌 app_api/                  # Backend FastAPI
+│   ├── maths/                   # Modules mathématiques
+│   │   └── mon_module.py       # Fonctions add, sub, square
+│   ├── models/                  # Modèles Pydantic v2
+│   │   └── models.py           # DataCreate, DataResponse
+│   ├── modules/                 # Logique métier
+│   │   ├── connect.py          # Connexion DB SQLAlchemy 2.0
+│   │   └── crud.py             # Opérations CRUD
+│   ├── data/                    # Données de test
+│   │   └── moncsv.csv
+│   ├── main.py                  # Point d'entrée API
+│   ├── Dockerfile               # Image Docker multi-stage
+│   └── pyproject.toml           # Dépendances uv
+│
+├── 🖥️ app_front/                # Frontend Streamlit
+│   ├── pages/                   # Pages Streamlit
+│   │   ├── 0_insert.py         # Page insertion
+│   │   └── 1_read.py           # Page lecture
+│   ├── main.py                  # Page d'accueil
+│   ├── Dockerfile               # Image Docker
+│   └── pyproject.toml           # Dépendances uv
+│
+├── 🛠️ scripts/                  # Scripts utilitaires
+│   ├── deploy.ps1               # Déploiement production
+│   ├── start.ps1                # Démarrage services
+│   ├── stop.ps1                 # Arrêt services
+│   ├── test.ps1                 # Lancement tests
+│   ├── logs.ps1                 # Consultation logs
+│   └── view-docs.ps1            # Génération & ouverture doc
+│
+├── 🐳 docker-compose.yml        # Orchestration développement
+├── 🚢 docker-compose.prod.yml   # Orchestration production
+├── 📋 conftest.py               # Configuration pytest
+├── 🔐 .env.example              # Template variables d'env
+├── 🚫 .gitignore                # Fichiers exclus Git
+├── 🚫 .dockerignore             # Fichiers exclus Docker
+├── 🔒 .gitleaks.toml            # Configuration Gitleaks
+├── 📖 README.md                 # Ce fichier
+└── 📝 Projet_2_Orchestration.md  # Cahier des charges
 ```
 
 ## 🔗 Liens Utiles
