@@ -82,15 +82,18 @@ docker-compose up -d
 ```
 
 4. **Accéder aux services**
-- Frontend : http://localhost:8501
-- API : http://localhost:8000
-- Documentation API : http://localhost:8000/docs
+- **Frontend Streamlit** : [http://localhost:8501](http://localhost:8501)
+- **API FastAPI** : [http://localhost:8000](http://localhost:8000)
+- **Documentation API** : [http://localhost:8000/docs](http://localhost:8000/docs)
+- **Health check** : [http://localhost:8000/health](http://localhost:8000/health)
 
 ## 🏗️ Architecture
 
 Application microservices avec 3 conteneurs Docker :
-- **Streamlit** (Frontend) → Port 8501
-- **FastAPI** (Backend) → Port 8000
+- **Streamlit** (Frontend) → Port 8501 - [http://localhost:8501](http://localhost:8501)
+- **FastAPI** (Backend) → Port 8000 - [http://localhost:8000](http://localhost:8000)
+  - Documentation API interactive : [http://localhost:8000/docs](http://localhost:8000/docs)
+  - Health check : [http://localhost:8000/health](http://localhost:8000/health)
 - **PostgreSQL** (Database) → Port 5432 (interne)
 
 Réseaux isolés :
