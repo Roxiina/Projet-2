@@ -4,11 +4,10 @@ from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
 from main import app
 from modules.connect import Base, get_session
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 # Base de données de test en mémoire
 # Utiliser file-based SQLite au lieu de :memory: pour éviter les problèmes de connexions multiples
