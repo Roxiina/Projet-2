@@ -64,8 +64,6 @@ La documentation Sphinx couvre en détail :
 
 ### Installation
 
-### Installation
-
 1. **Cloner le repository**
 ```bash
 git clone https://github.com/Roxiina/Projet-2.git
