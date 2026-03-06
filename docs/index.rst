@@ -31,6 +31,7 @@ Ce projet implémente une architecture microservices complète avec :
    :caption: 📚 Démarrage
 
    quickstart
+   environment
    installation
    configuration
 

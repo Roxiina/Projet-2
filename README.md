@@ -111,7 +111,41 @@ Réseaux isolés :
 
 ## 👨‍💻 Pour les Développeurs
 
-### Installation de uv (si vous voulez lancer les tests localement)
+### 🔧 Environnement de développement
+
+Vous pouvez soit utiliser Docker directement, soit créer un environnement virtuel Python local.
+
+#### Option 1 : Environnement virtuel global (recommandé)
+
+Créez un environnement virtuel à la racine pour tout le projet :
+
+```bash
+# Créer l'environnement
+uv venv
+
+# Activer l'environnement
+.\.venv\Scripts\activate  # Windows
+source .venv/bin/activate  # Linux/macOS
+
+# Installer toutes les dépendances
+uv pip install -r requirements.txt
+```
+
+✅ **Avantages** : Tous les outils disponibles (pytest, ruff, sphinx), facile pour lancer les tests
+
+📖 **Guide complet** : Voir la [documentation complète](https://roxiina.github.io/Projet-2/environment.html) pour plus de détails
+
+#### Option 2 : Environnements par service
+
+```bash
+# API
+cd app_api && uv venv && uv sync --extra dev
+
+# Frontend  
+cd app_front && uv venv && uv sync
+```
+
+### Installation de uv
 
 **Windows (PowerShell)** :
 ```powershell
@@ -122,9 +156,6 @@ irm https://astral.sh/uv/install.ps1 | iex
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
-
-> **Note** : Un fichier `requirements.txt` est disponible à la racine pour une installation globale avec pip, 
-> mais il est recommandé d'utiliser `uv` avec les `pyproject.toml` de chaque service pour le développement.
 
 ### Commandes utiles
 
