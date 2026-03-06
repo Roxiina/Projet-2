@@ -9,25 +9,50 @@ Application complète de gestion de données avec architecture micro-services, o
 
 ## 📖 Documentation
 
-📚 **Documentation complète disponible dans le dossier [`docs/`](docs/_build/html/index.html)**
+### 🌐 Documentation en ligne
+
+📚 **[Consulter la documentation complète sur GitHub Pages](https://roxiina.github.io/Projet-2/)**
+
+> ⚠️ **Note** : Si le lien ne fonctionne pas encore, activez GitHub Pages :
+> 1. Allez dans **Settings** → **Pages**
+> 2. Source : **GitHub Actions**
+> 3. La documentation sera automatiquement déployée au prochain push
+
+### 💻 Documentation locale
+
+Pour générer et consulter la documentation en local :
+
+**Windows :**
+```bash
+cd docs
+pip install -r requirements.txt
+make.bat html
+start _build/html/index.html
+```
+
+**Linux/macOS :**
+```bash
+cd docs
+pip install -r requirements.txt
+make html
+open _build/html/index.html  # ou xdg-open sur Linux
+```
+
+**🚀 Raccourci Windows (script automatisé) :**
+```powershell
+.\scripts\view-docs.ps1
+```
+
+### 📚 Contenu de la documentation
 
 La documentation Sphinx couvre en détail :
 - 🚀 Installation et démarrage rapide
-- 🏗️ Architecture des microservices
-- 🧪 Tests et qualité (14 tests, 85% couverture)
-- 🐳 Déploiement Docker et CI/CD
+- 🏗️ Architecture des microservices (Frontend, API, Database)
+- 🧪 Tests et qualité du code (couverture > 80%)
+- 🐳 Déploiement Docker et orchestration
+- 🔄 CI/CD avec GitHub Actions
 - 📋 Guide de contribution et troubleshooting
 - 📦 Livrables du projet
-
-Pour consulter la documentation localement :
-```bash
-cd docs
-make.bat html  # Windows
-# ou
-make html      # Linux/macOS
-```
-
-Puis ouvrir `docs/_build/html/index.html` dans votre navigateur.
 
 ## 🚀 Démarrage Rapide
 
