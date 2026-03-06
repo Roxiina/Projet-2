@@ -110,10 +110,32 @@ cd app_front && uv run ruff check .
 
 ## 🚢 CI/CD
 
-3 workflows GitHub Actions :
-- **CI** : Tests automatiques et linting
-- **Security** : Scan Gitleaks pour détecter les secrets
-- **CD** : Build et push vers DockerHub (tags `latest` + SHA)
+4 workflows GitHub Actions automatisés :
+
+### 1. **CI - Intégration Continue** ✅
+- Tests unitaires (14 tests)
+- Linting Ruff (API + Frontend)
+- Couverture de code (pytest-cov)
+- Déclenché sur : `push` et `pull_request` (branches `main` et `develop`)
+
+### 2. **Security - Sécurité** 🔒
+- Scan Gitleaks pour détecter les secrets
+- Analyse de l'historique Git complet
+- Déclenché sur : `push` et `pull_request` (branches `main` et `develop`)
+
+### 3. **CD - Livraison Continue** 🚀
+- Build des images Docker (API + Frontend)
+- Push vers DockerHub avec tags :
+  - `latest` : Dernière version stable
+  - `<commit-sha>` : Version spécifique pour rollback
+- Déclenché sur : `push` sur `main` (après succès de la CI)
+
+### 4. **Documentation** 📚
+- Build de la documentation Sphinx
+- Déploiement automatique sur GitHub Pages
+- Déclenché sur : `push` sur `main`
+
+> 📊 Tous les statuts sont visibles via les badges en haut du README
 
 ## 📁 Structure du Projet
 
