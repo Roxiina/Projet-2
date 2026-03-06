@@ -130,10 +130,12 @@ cd app_front && uv run ruff check .
 
 ## 🔗 Liens Utiles
 
-- 📚 [Documentation complète](docs/_build/html/index.html)
+- 📚 [Documentation complète](https://roxiina.github.io/Projet-2/) (GitHub Pages)
 - 🤝 [Guide de contribution](.github/CONTRIBUTING.md)
 - 📜 [Code de conduite](.github/CODE_OF_CONDUCT.md)
 - 🎯 [Cahier des charges](Projet_2_Orchestration.md)
+- 🐳 [DockerHub - API](https://hub.docker.com/r/roxiina/app-api)
+- 🐳 [DockerHub - Frontend](https://hub.docker.com/r/roxiina/app-front)
 
 ## 📄 Licence
 
