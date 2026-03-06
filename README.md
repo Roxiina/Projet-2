@@ -7,6 +7,8 @@
 
 Application complète de gestion de données avec architecture micro-services, orchestration Docker et CI/CD.
 
+> 🚀 **Vous voulez juste tester rapidement ?** → Consultez le [**Guide de démarrage rapide (2 min)**](QUICKSTART.md)
+
 ## 📖 Documentation
 
 ### 🌐 Documentation en ligne
@@ -59,8 +61,11 @@ La documentation Sphinx couvre en détail :
 ### Prérequis
 
 - Docker et Docker Compose
-- uv (gestionnaire de paquets Python)
 - Git
+
+**Optionnel** (pour lancer les tests localement) :
+- Python 3.11+
+- uv (gestionnaire de paquets Python) - [Installation](https://docs.astral.sh/uv/getting-started/installation/)
 
 ### Installation
 
@@ -73,13 +78,17 @@ cd Projet-2
 2. **Configurer l'environnement**
 ```bash
 cp .env.example .env
-# Éditez .env avec vos valeurs
+# Les valeurs par défaut dans .env fonctionnent pour le développement local
+# Vous pouvez les modifier si besoin
 ```
 
 3. **Lancer l'application**
 ```bash
 docker-compose up -d
 ```
+
+> ⏱️ **Première exécution** : Le démarrage prend 1-2 minutes (build des images)  
+> ✅ **Attendez** que tous les conteneurs soient `healthy` : `docker-compose ps`
 
 4. **Accéder aux services**
 - **Frontend Streamlit** : [http://localhost:8501](http://localhost:8501)
@@ -100,10 +109,43 @@ Réseaux isolés :
 - `front-api` : Communication Streamlit ↔ FastAPI
 - `api-db` : Communication FastAPI ↔ PostgreSQL
 
+## 👨‍💻 Pour les Développeurs
+
+### Installation de uv (si vous voulez lancer les tests localement)
+
+**Windows (PowerShell)** :
+```powershell
+irm https://astral.sh/uv/install.ps1 | iex
+```
+
+**Linux/macOS** :
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+### Commandes utiles
+
+```bash
+# Voir les logs en temps réel
+docker-compose logs -f
+
+# Redémarrer un service spécifique
+docker restart fastapi_api
+
+# Voir l'état des conteneurs
+docker-compose ps
+
+# Arrêter l'application
+docker-compose down
+
+# Arrêter et supprimer les volumes (⚠️ perte de données)
+docker-compose down -v
+```
+
 ## 🧪 Tests et Qualité
 
 ```bash
-# Tests (14 tests, 85% couverture)
+# Tests (14 tests, 71% couverture)
 uv run --directory ./app_api pytest ../tests/ -v
 
 # Linting (Ruff)
