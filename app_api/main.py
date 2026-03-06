@@ -22,13 +22,13 @@ async def lifespan(app: FastAPI):
     Yields:
         Contrôle à l'application pendant son exécution
     """
-    # Démarrage
+    # Démarrage de l'application
     init_db()
-    print("🚀 Base de données initialisée")
-    print(f"📊 Environnement: {os.getenv('ENVIRONMENT', 'development')}")
+    print("[INFO] Base de données initialisée avec succès")
+    print(f"[INFO] Environnement: {os.getenv('ENVIRONMENT', 'development')}")
     yield
-    # Arrêt (si besoin de nettoyage)
-    print("👋 Arrêt de l'application")
+    # Arrêt de l'application (nettoyage des ressources si nécessaire)
+    print("[INFO] Arrêt de l'application")
 
 
 # Créer l'application FastAPI

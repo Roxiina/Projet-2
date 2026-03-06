@@ -1,4 +1,8 @@
-"""Page pour insérer des données."""
+"""Page pour insérerdes données.
+
+Cette page permet à l'utilisateur de soumettre de nouvelles données
+à l'API backend via un formulaire interactif.
+"""
 
 import os
 
@@ -7,7 +11,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Insérer des Données", page_icon="🔢")
 
-st.title("🔢 Insérer des Données")
+st.title("Insérer des Données")
 
 # Récupérer l'URL de l'API depuis les variables d'environnement
 API_URL = os.getenv("API_URL", "http://localhost:8000")
@@ -36,7 +40,7 @@ with st.form("insert_form"):
         "Description (optionnelle)", max_chars=500, help="Ajoutez une description pour cette valeur"
     )
 
-    submitted = st.form_submit_button("💾 Enregistrer", use_container_width=True)
+    submitted = st.form_submit_button("Enregistrer", use_container_width=True)
 
     if submitted:
         # Préparer les données
@@ -49,7 +53,7 @@ with st.form("insert_form"):
 
                 if response.status_code == 201:
                     result = response.json()
-                    st.success("✅ Données enregistrées avec succès !")
+                    st.success("Données enregistrées avec succès !")
 
                     # Afficher les détails
                     col1, col2, col3 = st.columns(3)
@@ -58,26 +62,26 @@ with st.form("insert_form"):
                     with col2:
                         st.metric("Valeur", f"{result['value']:.2f}")
                     with col3:
-                        st.info(f"📅 {result['created_at'][:10]}")
+                        st.info(f"Créé le: {result['created_at'][:10]}")
 
                     if result.get("description"):
-                        st.info(f"📝 Description : {result['description']}")
+                        st.info(f"Description: {result['description']}")
 
                     # Message de confirmation
                     st.balloons()
                 else:
-                    st.error(f"❌ Erreur {response.status_code}: {response.text}")
+                    st.error(f"Erreur {response.status_code}: {response.text}")
 
         except requests.exceptions.ConnectionError:
-            st.error(f"❌ Impossible de se connecter à l'API ({API_URL})")
-            st.info("💡 Assurez-vous que l'API est en cours d'exécution")
+            st.error(f"Impossible de se connecter à l'API ({API_URL})")
+            st.info("Assurez-vous que l'API est en cours d'exécution")
         except requests.exceptions.Timeout:
-            st.error("⏱️ Délai d'attente dépassé")
+            st.error("Délai d'attente dépassé")
         except Exception as e:
-            st.error(f"❌ Erreur inattendue : {str(e)}")
+            st.error(f"Erreur inattendue: {str(e)}")
 
 # Section d'aide
-with st.expander("ℹ️ Aide"):
+with st.expander("Aide"):
     st.markdown("""
     ### Comment utiliser cette page ?
     
@@ -96,8 +100,8 @@ with st.expander("ℹ️ Aide"):
 try:
     health_response = requests.get(f"{API_URL}/health", timeout=2)
     if health_response.status_code == 200:
-        st.sidebar.success("✅ API connectée")
+        st.sidebar.success("API connectée")
     else:
-        st.sidebar.warning("⚠️ API accessible mais problème")
+        st.sidebar.warning("API accessible mais problème")
 except:
-    st.sidebar.error("❌ API non accessible")
+    st.sidebar.error("API non accessible")

@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # Page d'accueil
-st.title("📊 Application de Gestion de Données")
+st.title("Application de Gestion de Données")
 
 st.markdown("""
 ## Bienvenue !
@@ -22,8 +22,8 @@ Cette application permet de gérer des données via une interface conviviale.
 
 ### Fonctionnalités :
 
-- **🔢 Insérer des données** : Ajoutez de nouvelles valeurs numériques avec descriptions
-- **📖 Lire les données** : Consultez toutes les données enregistrées
+- **Insérer des données** : Ajoutez de nouvelles valeurs numériques avec descriptions
+- **Lire les données** : Consultez toutes les données enregistrées
 
 ### Comment utiliser cette application :
 
@@ -39,12 +39,12 @@ Cette application permet de gérer des données via une interface conviviale.
 
 ---
 
-👈 **Commencez en sélectionnant une page dans la barre latérale**
+**Commencez en sélectionnant une page dans la barre latérale**
 """)
 
 # Informations de connexion
 st.sidebar.markdown("---")
-st.sidebar.markdown("### ℹ️ Informations")
+st.sidebar.markdown("### Informations")
 api_url = os.getenv("API_URL", "http://localhost:8000")
 st.sidebar.info(f"API: {api_url}")
-st.sidebar.success("✅ Application prête")
+st.sidebar.success("Application prête")

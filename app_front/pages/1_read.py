@@ -1,7 +1,12 @@
-"""Page pour lire et afficher les données."""
+"""Page pour lire et afficher les données.
+
+Cette page récupère les données depuis l'API et les affiche
+sous différents formats (tableau, cartes, détails).
+"""
 
 import os
 from datetime import datetime
+from typing import Any, Dict, List
 
 import pandas as pd
 import requests
@@ -9,7 +14,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Lire les Données", page_icon="📖")
 
-st.title("📖 Lire les Données")
+st.title("Lire les Données")
 
 # Récupérer l'URL de l'API depuis les variables d'environnement
 API_URL = os.getenv("API_URL", "http://localhost:8000")
@@ -23,12 +28,12 @@ Cette page affiche toutes les données enregistrées dans la base de données.
 # Bouton pour rafraîchir les données
 col1, col2, col3 = st.columns([1, 1, 2])
 with col1:
-    refresh = st.button("🔄 Rafraîchir", use_container_width=True)
+    refresh = st.button("Rafraîchir", use_container_width=True)
 with col2:
-    show_stats = st.checkbox("📊 Statistiques", value=False)
+    show_stats = st.checkbox("Statistiques", value=False)
 
 # Paramètres de pagination
-with st.expander("⚙️ Paramètres"):
+with st.expander("Paramètres"):
     limit = st.slider("Nombre max de résultats", 10, 100, 50, 10)
     skip = st.number_input("Ignorer les premiers résultats", 0, 1000, 0, 10)
 
@@ -49,7 +54,7 @@ try:
 
                 # Afficher les statistiques si demandé
                 if show_stats:
-                    st.subheader("📊 Statistiques")
+                    st.subheader("Statistiques")
                     col1, col2, col3, col4 = st.columns(4)
 
                     with col1:
@@ -64,7 +69,7 @@ try:
                     st.markdown("---")
 
                 # Afficher le tableau
-                st.subheader(f"📋 Données ({len(data)} résultat(s))")
+                st.subheader(f"Données ({len(data)} résultat(s))")
 
                 # Options d'affichage
                 display_mode = st.radio(
@@ -88,7 +93,7 @@ try:
                     # Option de téléchargement
                     csv = df.to_csv(index=False).encode("utf-8")
                     st.download_button(
-                        label="📥 Télécharger en CSV",
+                        label="Télécharger en CSV",
                         data=csv,
                         file_name=f"data_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
                         mime="text/csv",
@@ -100,10 +105,10 @@ try:
                         with st.container():
                             col1, col2 = st.columns([3, 1])
                             with col1:
-                                st.markdown(f"### 🔢 Valeur: **{item['value']:.2f}**")
+                                st.markdown(f"### Valeur: **{item['value']:.2f}**")
                                 if item.get("description"):
                                     st.markdown(f"*{item['description']}*")
-                                st.caption(f"📅 Créé le : {item['created_at'][:10]}")
+                                st.caption(f"Créé le: {item['created_at'][:10]}")
                             with col2:
                                 st.metric("ID", item["id"])
                             st.markdown("---")
@@ -111,7 +116,7 @@ try:
                 else:  # Détails
                     # Affichage détaillé
                     for idx, item in enumerate(data, 1):
-                        with st.expander(f"📄 Entrée #{item['id']} - Valeur: {item['value']:.2f}"):
+                        with st.expander(f"Entrée #{item['id']} - Valeur: {item['value']:.2f}"):
                             col1, col2 = st.columns(2)
                             with col1:
                                 st.write("**ID:**", item["id"])
@@ -121,21 +126,21 @@ try:
                                 st.write("**Description:**", item.get("description", "N/A"))
 
             else:
-                st.info("ℹ️ Aucune donnée disponible. Ajoutez des données via la page **Insert**.")
+                st.info("Aucune donnée disponible. Ajoutez des données via la page Insert.")
 
         else:
-            st.error(f"❌ Erreur {response.status_code}: {response.text}")
+            st.error(f"Erreur {response.status_code}: {response.text}")
 
 except requests.exceptions.ConnectionError:
-    st.error(f"❌ Impossible de se connecter à l'API ({API_URL})")
-    st.info("💡 Assurez-vous que l'API est en cours d'exécution")
+    st.error(f"Impossible de se connecter à l'API ({API_URL})")
+    st.info("Assurez-vous que l'API est en cours d'exécution")
 except requests.exceptions.Timeout:
-    st.error("⏱️ Délai d'attente dépassé")
+    st.error("Délai d'attente dépassé")
 except Exception as e:
-    st.error(f"❌ Erreur inattendue : {str(e)}")
+    st.error(f"Erreur inattendue: {str(e)}")
 
 # Section d'informations
-with st.expander("ℹ️ Informations"):
+with st.expander("Informations"):
     st.markdown("""
     ### À propos de cette page
     
@@ -152,8 +157,8 @@ with st.expander("ℹ️ Informations"):
 try:
     health_response = requests.get(f"{API_URL}/health", timeout=2)
     if health_response.status_code == 200:
-        st.sidebar.success("✅ API connectée")
+        st.sidebar.success("API connectée")
     else:
-        st.sidebar.warning("⚠️ API accessible mais problème")
+        st.sidebar.warning("API accessible mais problème")
 except:
-    st.sidebar.error("❌ API non accessible")
+    st.sidebar.error("API non accessible")
