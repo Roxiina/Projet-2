@@ -25,7 +25,7 @@ Base = declarative_base()
 
 class DataModel(Base):
     """Modèle SQLAlchemy pour la table data.
-    
+
     Attributes:
         id: Identifiant unique auto-incrémenté
         value: Valeur numérique stockée
@@ -43,7 +43,7 @@ class DataModel(Base):
 
 def get_database_url() -> str:
     """Récupère l'URL de la base de données depuis les variables d'environnement.
-    
+
     Lit la variable DB_TYPE pour déterminer le type de base (postgresql ou sqlite).
     Pour PostgreSQL, lit POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST,
     POSTGRES_PORT et POSTGRES_DB.
@@ -52,7 +52,7 @@ def get_database_url() -> str:
         str: URL de connexion au format SQLAlchemy
             - PostgreSQL: postgresql://user:pass@host:port/db
             - SQLite: sqlite:///./test.db
-    
+
     Example:
         >>> os.environ["DB_TYPE"] = "postgresql"
         >>> url = get_database_url()
@@ -74,7 +74,7 @@ def get_database_url() -> str:
 
 def get_engine() -> Engine:
     """Crée et retourne un engine SQLAlchemy.
-    
+
     Configure automatiquement l'engine selon le type de base de données.
     Pour SQLite, ajoute check_same_thread=False pour permettre
     l'utilisation multi-thread.
@@ -95,10 +95,10 @@ def get_engine() -> Engine:
 
 def init_db() -> Engine:
     """Initialise la base de données en créant toutes les tables.
-    
+
     Crée automatiquement toutes les tables définies par les modèles
     qui héritent de Base. Si les tables existent déjà, ne fait rien.
-    
+
     Returns:
         Engine: Engine SQLAlchemy utilisé pour l'initialisation
     """
@@ -109,13 +109,13 @@ def init_db() -> Engine:
 
 def get_session() -> Generator[Session, None, None]:
     """Crée et retourne une session de base de données.
-    
+
     Générateur qui crée une session, la yield pour utilisation,
     puis la ferme automatiquement. Utilisé avec Depends() dans FastAPI.
-    
+
     Yields:
         Session: Session SQLAlchemy pour interagir avec la base
-    
+
     Example:
         >>> @app.get("/data")
         >>> async def read_data(db: Session = Depends(get_session)):

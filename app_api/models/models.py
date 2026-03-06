@@ -17,9 +17,9 @@ from pydantic import BaseModel, ConfigDict, Field
 
 class DataCreate(BaseModel):
     """Modèle pour la création de données.
-    
+
     Utilisé pour valider les données reçues dans les requêtes POST.
-    
+
     Attributes:
         value: Valeur numérique à stocker (obligatoire)
         description: Description textuelle optionnelle
@@ -27,7 +27,7 @@ class DataCreate(BaseModel):
 
     value: float = Field(..., description="Valeur numérique à stocker", examples=[42.5])
     description: Optional[str] = Field(
-        None, 
+        None,
         description="Description optionnelle",
         max_length=500,
         examples=["Température moyenne"]
@@ -40,9 +40,9 @@ class DataCreate(BaseModel):
 
 class DataResponse(BaseModel):
     """Modèle pour la réponse contenant les données.
-    
+
     Utilisé pour sérialiser les données retournées par l'API.
-    
+
     Attributes:
         id: Identifiant unique auto-généré
         value: Valeur numérique stockée
@@ -53,12 +53,12 @@ class DataResponse(BaseModel):
     id: int = Field(..., description="Identifiant unique", examples=[1])
     value: float = Field(..., description="Valeur numérique", examples=[42.5])
     description: Optional[str] = Field(
-        None, 
+        None,
         description="Description",
         examples=["Température moyenne"]
     )
     created_at: datetime = Field(
-        ..., 
+        ...,
         description="Date de création",
         examples=["2026-03-05T10:00:00"]
     )
