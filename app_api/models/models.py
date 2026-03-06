@@ -3,7 +3,7 @@
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class DataCreate(BaseModel):
@@ -12,8 +12,9 @@ class DataCreate(BaseModel):
     value: float = Field(..., description="Valeur numérique à stocker")
     description: Optional[str] = Field(None, description="Description optionnelle")
 
-    class Config:
-        json_schema_extra = {"example": {"value": 42.5, "description": "Une valeur de test"}}
+    model_config = ConfigDict(
+        json_schema_extra={"example": {"value": 42.5, "description": "Une valeur de test"}}
+    )
 
 
 class DataResponse(BaseModel):
@@ -24,13 +25,14 @@ class DataResponse(BaseModel):
     description: Optional[str] = Field(None, description="Description")
     created_at: datetime = Field(..., description="Date de création")
 
-    class Config:
-        from_attributes = True
-        json_schema_extra = {
+    model_config = ConfigDict(
+        from_attributes=True,
+        json_schema_extra={
             "example": {
                 "id": 1,
                 "value": 42.5,
                 "description": "Une valeur de test",
                 "created_at": "2026-03-05T10:00:00",
             }
-        }
+        },
+    )

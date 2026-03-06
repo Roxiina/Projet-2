@@ -4,8 +4,7 @@ import os
 from datetime import datetime
 
 from sqlalchemy import Column, DateTime, Float, Integer, String, create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 # Base pour les modèles
 Base = declarative_base()

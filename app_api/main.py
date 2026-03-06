@@ -1,6 +1,7 @@
 """API FastAPI pour gérer les données."""
 
 import os
+from contextlib import asynccontextmanager
 from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException
@@ -10,11 +11,32 @@ from sqlalchemy.orm import Session
 from models import DataCreate, DataResponse
 from modules import create_data, get_all_data, get_data_by_id, get_session, init_db
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Gère le cycle de vie de l'application (démarrage et arrêt).
+
+    Args:
+        app: Instance FastAPI
+
+    Yields:
+        Contrôle à l'application pendant son exécution
+    """
+    # Démarrage
+    init_db()
+    print("🚀 Base de données initialisée")
+    print(f"📊 Environnement: {os.getenv('ENVIRONMENT', 'development')}")
+    yield
+    # Arrêt (si besoin de nettoyage)
+    print("👋 Arrêt de l'application")
+
+
 # Créer l'application FastAPI
 app = FastAPI(
     title="Data Management API",
     description="API pour gérer les données avec persistance en base de données",
     version="1.0.0",
+    lifespan=lifespan,
 )
 
 # Configuration CORS
@@ -25,14 +47,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-@app.on_event("startup")
-async def startup_event():
-    """Initialise la base de données au démarrage."""
-    init_db()
-    print("🚀 Base de données initialisée")
-    print(f"📊 Environnement: {os.getenv('ENVIRONMENT', 'development')}")
 
 
 @app.get("/")
