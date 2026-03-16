@@ -42,12 +42,14 @@ jobs:
     
     - name: Upload de la couverture vers Codecov
       uses: codecov/codecov-action@v4
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
         files: ./app_api/coverage.xml
         flags: unittests
         name: codecov-umbrella
+        fail_ci_if_error: false
+        verbose: true
+        disable_search: true
         fail_ci_if_error: false
         verbose: true
     

@@ -1,0 +1,46 @@
+# Configuration Codecov pour Projet-2
+# Documentation : https://docs.codecov.com/docs/codecov-yaml
+
+# Informations sur la couverture
+coverage:
+  status:
+    project:
+      default:
+        target: 80%
+        threshold: 2%
+    patch:
+      default:
+        target: 80%
+  
+  precision: 2
+  round: down
+  range: "70...100"
+
+# Configuration des commentaires sur les Pull Requests
+comment:
+  layout: "header, diff, changes, tree"
+  behavior: default
+  require_changes: false
+  require_base: false
+  require_head: true
+
+# Ignorer certains fichiers dans les calculs de couverture
+ignore:
+  - "tests/**"
+  - "**/__pycache__/**"
+  - "**/htmlcov/**"
+  - "docs/**"
+  - "scripts/**"
+  - "**/.pytest_cache/**"
+  - "**/test_*.py"
+
+# Flags pour différencier les types de tests
+flags:
+  unittests:
+    carryforward: true
+    paths:
+      - app_api/
+
+# Limite de taille des fichiers patch
+github_checks:
+  annotations: true
