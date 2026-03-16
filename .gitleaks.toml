@@ -41,7 +41,9 @@ files = [
     '''^\.env\.example$''',
     '''README\.md$''',
     '''QUICKSTART\.md$''',
-    '''\.github/workflows/.*\.yml$'''
+    '''\.github/workflows/.*\.yml$''',
+    '''docs/.*\.rst$''',
+    '''docs/.*\.md$'''
 ]
 
 # Allowlist - Patterns à ignorer
@@ -51,6 +53,9 @@ regexes = [
     '''your_db_password''',
     '''VOTRE_USERNAME''',
     '''DOCKERHUB_USERNAME''',
+    '''projet2_user''',
+    '''projet2_password''',
+    '''projet2_db''',
 ]
 
 # Allowlist - Commits à ignorer (si besoin)
