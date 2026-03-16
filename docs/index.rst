@@ -6,7 +6,7 @@ Projet 2 - Orchestration et Livraison Continue
 
 .. image:: https://github.com/Roxiina/Projet-2/actions/workflows/ci.yml/badge.svg
    :target: https://github.com/Roxiina/Projet-2/actions/workflows/ci.yml
-   :alt: CI Status
+   :alt: CI Status (Tests + Linting + Coverage)
 
 .. image:: https://github.com/Roxiina/Projet-2/actions/workflows/security.yml/badge.svg
    :target: https://github.com/Roxiina/Projet-2/actions/workflows/security.yml

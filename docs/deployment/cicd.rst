@@ -49,10 +49,19 @@ Fichier: ``.github/workflows/ci.yml``
 
 Ce workflow effectue :
 
-* 🧪 Linting du code avec Ruff
-* ✅ Tests unitaires avec Pytest
-* 📊 Calcul de la couverture de code (>80% requis)
-* 📤 Upload des rapports vers Codecov
+* 🧪 **Linting du code** avec Ruff (analyse statique : PEP 8, imports inutilisés, erreurs potentielles)
+* ✅ **Tests unitaires** avec Pytest (45 tests)
+* 📊 **Calcul de la couverture de code** (>80% requis)
+* 📤 **Upload des rapports** vers Codecov
+
+.. note::
+   Le badge **CI** regroupe 3 vérifications :
+   
+   1. **Linting Ruff** : Vérifie la qualité et le style du code Python
+   2. **Tests** : Exécution de tous les tests pytest
+   3. **Coverage** : Vérification du pourcentage de couverture
+   
+   Le badge est vert ✅ uniquement si les 3 passent avec succès.
 
 .. code-block:: yaml
 

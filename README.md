@@ -6,6 +6,14 @@
 [![Documentation](https://github.com/Roxiina/Projet-2/actions/workflows/docs.yml/badge.svg)](https://github.com/Roxiina/Projet-2/actions/workflows/docs.yml)
 [![codecov](https://codecov.io/gh/Roxiina/Projet-2/branch/main/graph/badge.svg)](https://codecov.io/gh/Roxiina/Projet-2)
 
+### 📊 Signification des badges
+
+- **CI** : Tests automatiques (45 tests) + Linting Ruff + Couverture ≥80%
+- **Security** : Scan Gitleaks (détection de secrets)
+- **CD** : Déploiement automatique sur DockerHub
+- **Documentation** : Génération et déploiement sur GitHub Pages
+- **codecov** : Pourcentage de couverture de code (actuellement 88%)
+
 Application complète de gestion de données avec architecture micro-services, orchestration Docker et CI/CD.
 
 > 🚀 **Vous voulez juste tester rapidement ?** → Consultez le [**Guide de démarrage rapide (2 min)**](https://roxiina.github.io/Projet-2/quickstart.html)

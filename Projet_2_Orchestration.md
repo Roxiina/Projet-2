@@ -202,9 +202,55 @@ Créez le `docker-compose` : **`docker-compose.prod.yml`** qui ne build mais cha
 
 ---
 
-## 6. Livrables attendus
+## 6. Badges de Statut Implémentés
 
-* [ ] Un dépôt GitHub avec tous les badges (CI, Coverage) au vert.
-* [ ] Un fichier `docker-compose.prod.yml` permettant de lancer votre application complète en téléchargeant uniquement les images depuis DockerHub.
-* [ ] La preuve que Gitleaks est actif dans votre pipeline de sécurité.
+Le projet dispose de **5 badges de statut** visibles dans le README et la documentation :
+
+### ✅ Badges GitHub Actions
+
+1. **CI (Continuous Integration)**
+   - Badge : ![CI](https://github.com/Roxiina/Projet-2/actions/workflows/ci.yml/badge.svg)
+   - Workflow : `.github/workflows/ci.yml`
+   - Vérifie : Tests pytest, linting Ruff, couverture de code
+   - Déclenchement : Push sur `main` et `develop`
+
+2. **Security (Gitleaks)**
+   - Badge : ![Security](https://github.com/Roxiina/Projet-2/actions/workflows/security.yml/badge.svg)
+   - Workflow : `.github/workflows/security.yml`
+   - Vérifie : Détection de secrets dans le code
+   - Déclenchement : Push et pull requests
+
+3. **CD (Continuous Deployment)**
+   - Badge : ![CD](https://github.com/Roxiina/Projet-2/actions/workflows/cd.yml/badge.svg)
+   - Workflow : `.github/workflows/cd.yml`
+   - Action : Build et push des images Docker sur DockerHub
+   - Déclenchement : Après succès de la CI sur `main`
+
+4. **Documentation**
+   - Badge : ![Documentation](https://github.com/Roxiina/Projet-2/actions/workflows/docs.yml/badge.svg)
+   - Workflow : `.github/workflows/docs.yml`
+   - Action : Déploiement Sphinx sur GitHub Pages
+   - Déclenchement : Push sur `main`
+
+5. **Code Coverage (Codecov)**
+   - Badge : ![codecov](https://codecov.io/gh/Roxiina/Projet-2/branch/main/graph/badge.svg)
+   - Intégration : Codecov via ci.yml
+   - Affiche : Pourcentage de couverture de code (actuellement **88%**)
+   - Seuil requis : ≥ 80%
+
+### 📊 Résultats Actuels
+
+- ✅ **45/45 tests** passent avec succès
+- ✅ **88% de couverture** (dépasse l'objectif de 80%)
+- ✅ **Sécurité** : Aucun secret détecté par Gitleaks
+- ✅ **Docker** : Images publiées sur DockerHub
+- ✅ **Documentation** : Déployée sur [GitHub Pages](https://roxiina.github.io/Projet-2/)
+
+---
+
+## 7. Livrables attendus
+
+* [x] Un dépôt GitHub avec tous les badges (CI, Coverage) au vert. ✅
+* [x] Un fichier `docker-compose.prod.yml` permettant de lancer votre application complète en téléchargeant uniquement les images depuis DockerHub. ✅
+* [x] La preuve que Gitleaks est actif dans votre pipeline de sécurité. ✅
 
