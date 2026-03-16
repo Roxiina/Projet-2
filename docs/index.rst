@@ -4,6 +4,26 @@
 Projet 2 - Orchestration et Livraison Continue
 ==================================================
 
+.. image:: https://github.com/Roxiina/Projet-2/actions/workflows/ci.yml/badge.svg
+   :target: https://github.com/Roxiina/Projet-2/actions/workflows/ci.yml
+   :alt: CI Status
+
+.. image:: https://github.com/Roxiina/Projet-2/actions/workflows/security.yml/badge.svg
+   :target: https://github.com/Roxiina/Projet-2/actions/workflows/security.yml
+   :alt: Security Status
+
+.. image:: https://github.com/Roxiina/Projet-2/actions/workflows/cd.yml/badge.svg
+   :target: https://github.com/Roxiina/Projet-2/actions/workflows/cd.yml
+   :alt: CD Status
+
+.. image:: https://github.com/Roxiina/Projet-2/actions/workflows/docs.yml/badge.svg
+   :target: https://github.com/Roxiina/Projet-2/actions/workflows/docs.yml
+   :alt: Documentation Status
+
+.. image:: https://codecov.io/gh/Roxiina/Projet-2/branch/main/graph/badge.svg
+   :target: https://codecov.io/gh/Roxiina/Projet-2
+   :alt: Code Coverage
+
 .. image:: https://img.shields.io/badge/Python-3.11+-blue.svg
    :target: https://www.python.org/downloads/
    :alt: Python Version

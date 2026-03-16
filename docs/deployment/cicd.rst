@@ -4,6 +4,22 @@ CI/CD
 
 Pipeline d'intégration et de livraison continues avec GitHub Actions.
 
+.. image:: https://github.com/Roxiina/Projet-2/actions/workflows/ci.yml/badge.svg
+   :target: https://github.com/Roxiina/Projet-2/actions/workflows/ci.yml
+   :alt: CI Status
+
+.. image:: https://github.com/Roxiina/Projet-2/actions/workflows/security.yml/badge.svg
+   :target: https://github.com/Roxiina/Projet-2/actions/workflows/security.yml
+   :alt: Security Status
+
+.. image:: https://github.com/Roxiina/Projet-2/actions/workflows/cd.yml/badge.svg
+   :target: https://github.com/Roxiina/Projet-2/actions/workflows/cd.yml
+   :alt: CD Status
+
+.. image:: https://github.com/Roxiina/Projet-2/actions/workflows/docs.yml/badge.svg
+   :target: https://github.com/Roxiina/Projet-2/actions/workflows/docs.yml
+   :alt: Documentation Status
+
 Vue d'Ensemble
 ==============
 
@@ -11,22 +27,32 @@ Le projet utilise **GitHub Actions** pour :
 
 * ✅ Tests automatiques (pytest)
 * ✅ Linting (Ruff)
+* 📊 Couverture de code (Codecov)
 * 🔒 Scan de sécurité (Gitleaks)
+* 📚 Déploiement documentation (GitHub Pages)
 * 🚀 Déploiement DockerHub
 
 Workflows
 =========
 
-Le projet implémente 3 workflows :
+Le projet implémente 4 workflows :
 
-1. **ci.yml** : Tests et linting
+1. **ci.yml** : Tests, linting et couverture
 2. **security.yml** : Scan de sécurité
 3. **cd.yml** : Déploiement DockerHub
+4. **docs.yml** : Déploiement documentation
 
 Workflow CI
 ===========
 
 Fichier: ``.github/workflows/ci.yml``
+
+Ce workflow effectue :
+
+* 🧪 Linting du code avec Ruff
+* ✅ Tests unitaires avec Pytest
+* 📊 Calcul de la couverture de code (>80% requis)
+* 📤 Upload des rapports vers Codecov
 
 .. code-block:: yaml
 
@@ -48,15 +74,54 @@ Fichier: ``.github/workflows/ci.yml``
            python-version: '3.11'
        
        - name: Installation de uv
-         run: curl -LsSf https://astral.sh/uv/install.sh | sh
+         run: |
+           curl -LsSf https://astral.sh/uv/install.sh | sh
+           echo "$HOME/.cargo/bin" >> $GITHUB_PATH
        
-       - name: Tests avec Pytest
-         run: uv run --directory ./app_api pytest ../tests/ -v
+       - name: Installation des dépendances
+         working-directory: ./app_api
+         run: uv sync --extra dev
+       
+       - name: Linting avec Ruff
+         working-directory: ./app_api
+         run: uv run ruff check .
+       
+       - name: Tests avec Pytest et couverture
+         working-directory: ./app_api
+         run: |
+           uv run pytest ../tests/ -v \
+             --cov=. \
+             --cov-report=xml \
+             --cov-report=html \
+             --cov-report=term \
+             --cov-fail-under=80
+       
+       - name: Upload vers Codecov
+         uses: codecov/codecov-action@v4
+         with:
+           files: ./app_api/coverage.xml
+           flags: unittests
+           fail_ci_if_error: false
+           verbose: true
+
+Points Clés
+-----------
+
+* 🎯 **Seuil de couverture** : 80% minimum requis
+* 📊 **Codecov** : Upload automatique des rapports
+* 🔄 **Branches** : CI s'exécute sur main et develop
+* ⚡ **uv** : Gestionnaire de paquets Python moderne
 
 Workflow Security
 =================
 
 Fichier: ``.github/workflows/security.yml``
+
+Ce workflow effectue :
+
+* 🔒 Détection de secrets exposés avec Gitleaks
+* 📝 Rapport SARIF pour GitHub Security
+* ⚠️ Alerte en cas de découverte de secrets
 
 .. code-block:: yaml
 
@@ -76,6 +141,72 @@ Fichier: ``.github/workflows/security.yml``
          uses: gitleaks/gitleaks-action@v2
          env:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+Configuration Gitleaks
+----------------------
+
+Le fichier ``.gitleaks.toml`` définit :
+
+* 🎯 Les patterns à détecter (API keys, tokens, passwords)
+* ✅ Les fichiers à ignorer (documentation, exemples)
+* 📋 Les valeurs autorisées (credentials de test)
+
+Workflow Documentation
+======================
+
+Fichier: ``.github/workflows/docs.yml``
+
+Ce workflow déploie automatiquement la documentation Sphinx sur GitHub Pages.
+
+.. code-block:: yaml
+
+   name: Documentation
+   
+   on:
+     push:
+       branches: [ main ]
+   
+   permissions:
+     contents: read
+     pages: write
+     id-token: write
+   
+   jobs:
+     build:
+       runs-on: ubuntu-latest
+       steps:
+       - uses: actions/checkout@v4
+       
+       - name: Setup Python
+         uses: actions/setup-python@v5
+         with:
+           python-version: '3.11'
+       
+       - name: Install dependencies
+         run: |
+           cd docs
+           pip install -r requirements.txt
+       
+       - name: Build HTML
+         run: |
+           cd docs
+           make html
+       
+       - name: Upload artifact
+         uses: actions/upload-pages-artifact@v3
+         with:
+           path: 'docs/_build/html'
+     
+     deploy:
+       needs: build
+       runs-on: ubuntu-latest
+       steps:
+       - name: Deploy to GitHub Pages
+         uses: actions/deploy-pages@v4
+
+La documentation est accessible sur :
+
+📚 **https://roxiina.github.io/Projet-2/**
 
 Workflow CD
 ===========
