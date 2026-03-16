@@ -40,13 +40,16 @@ jobs:
       run: |
         uv run pytest ../tests/ -v --cov=. --cov-report=xml --cov-report=html --cov-report=term --cov-fail-under=80
     
-    - name: Upload de la couverture
-      uses: codecov/codecov-action@v3
+    - name: Upload de la couverture vers Codecov
+      uses: codecov/codecov-action@v4
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       with:
-        file: ./app_api/coverage.xml
+        files: ./app_api/coverage.xml
         flags: unittests
         name: codecov-umbrella
         fail_ci_if_error: false
+        verbose: true
     
     - name: Installation des dépendances du Frontend
       working-directory: ./app_front
