@@ -50,8 +50,6 @@ jobs:
         fail_ci_if_error: false
         verbose: true
         disable_search: true
-        fail_ci_if_error: false
-        verbose: true
     
     - name: Installation des dépendances du Frontend
       working-directory: ./app_front
