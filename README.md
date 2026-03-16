@@ -16,6 +16,150 @@
 
 Application complète de gestion de données avec architecture micro-services, orchestration Docker et CI/CD.
 
+---
+
+## 🎯 Objectifs du Projet
+
+* **Orchestration** : Piloter plusieurs services (Front, API, BDD) simultanément.
+* **Persistance** : Gérer les données avec PostgreSQL et les volumes Docker.
+* **Sécurité** : Maîtriser les variables d'environnement et la détection de fuites de secrets.
+* **Livraison (CD)** : Automatiser la création et le stockage de vos images sur DockerHub.
+
+## 🏗️ Architecture
+
+L'application est composée de trois services distincts :
+
+1. **Frontend (Streamlit)** : Interface utilisateur (Page 0 : Saisie / Page 1 : Affichage).
+2. **API (FastAPI)** : Le cerveau qui traite les requêtes et parle à la BDD.
+3. **Database (PostgreSQL)** : Le stockage persistant des données.
+
+### Schéma de l'architecture
+
+```mermaid
+graph TD
+    User((Utilisateur))
+
+    subgraph "Docker Compose"
+        
+        subgraph "Réseau front-api"
+            Front[Streamlit Frontend]
+            
+        end
+
+        subgraph "Réseau api-db"
+            API[FastAPI Backend]
+            DB[(PostgreSQL)]
+        end
+
+        subgraph "Stockage"
+            Vol[(Docker Volume)]
+        end
+    end
+
+    User -->|Port 8501| Front
+    Front <-->|Requêtes HTTP| API
+    API <-->|SQL| DB
+    DB -.->|Persistance| Vol
+
+    style Front fill:#f9f,stroke:#333,stroke-width:2px
+    style API fill:#bbf,stroke:#333,stroke-width:2px
+    style DB fill:#dfd,stroke:#333,stroke-width:2px
+    style Vol fill:#fff,stroke:#f66,stroke-dasharray: 5 5
+```
+
+## ✅ Fonctionnalités Implémentées
+
+### Phase A : Logique Métier ✅
+
+* ✅ **SQLite de test** : Module SQLAlchemy fonctionnel avec SQLite locale
+* ✅ **API FastAPI** : Routes `POST /data`, `GET /data`, `DELETE /data/{id}`
+* ✅ **Logique métier** : Code organisé (maths, connexion, crud, data)
+* ✅ **Frontend Streamlit** : Deux pages fonctionnelles
+* ✅ **Tests** : 45 tests avec 88% de couverture
+
+### Phase B : Variables d'Environnement ✅
+
+* ✅ **Extraction** : URLs, logins et mots de passe externalisés
+* ✅ **Fichiers de configuration** :
+  * `.env` : Secrets (exclu par `.gitignore`)
+  * `.env.example` : Template pour les variables nécessaires
+  * `.dockerignore` : Exclusion de `.env`, `.venv`, `__pycache__`
+
+### Phase C : Orchestration Docker Compose ✅
+
+* ✅ **Réseaux** :
+  * `front-api` : Communication Streamlit ↔ FastAPI
+  * `api-db` : Communication FastAPI ↔ PostgreSQL
+* ✅ **Volumes** : Persistance des données PostgreSQL
+* ✅ **Multi-stage builds** : Optimisation des images Docker
+
+### Phase D : CI/CD et Automatisation ✅
+
+* ✅ **CI améliorée** : `.github/workflows/ci.yml` avec tests, linting, coverage
+* ✅ **Security** : `.github/workflows/security.yml` avec Gitleaks
+* ✅ **CD** : `.github/workflows/cd.yml` pour DockerHub (tags `latest` et `commit SHA`)
+* ✅ **Documentation** : `.github/workflows/docs.yml` pour GitHub Pages
+
+## 📦 Structure du Projet
+
+```plaintext
+.
+├── .github/
+│   ├── workflows/
+│   │   ├── ci.yml          # Linting, Tests, Coverage
+│   │   ├── security.yml    # Scan Gitleaks
+│   │   ├── cd.yml          # Build & Push DockerHub
+│   │   └── docs.yml        # Déploiement GitHub Pages
+├── app_front/              # Service Streamlit
+│   ├── main.py
+│   ├── pages/
+│   │   ├── 0_insert.py
+│   │   └── 1_read.py
+│   ├── pyproject.toml
+│   ├── uv.lock
+│   └── Dockerfile
+├── app_api/                # Service FastAPI
+│   ├── Dockerfile
+│   ├── pyproject.toml
+│   ├── uv.lock
+│   ├── models/
+│   │   ├── __init__.py
+│   │   └── models.py
+│   ├── modules/
+│   │   ├── __init__.py
+│   │   ├── connect.py
+│   │   └── crud.py
+│   ├── maths/
+│   │   ├── __init__.py
+│   │   └── mon_module.py
+│   ├── data/
+│   │   └── moncsv.csv
+│   └── main.py
+├── tests/
+│   ├── test_api.py
+│   ├── test_delete.py
+│   ├── test_coverage.py
+│   └── test_math_csv.py
+├── docs/                   # Documentation Sphinx
+├── docker-compose.yml      # Développement (build local)
+├── docker-compose.prod.yml # Production (images DockerHub)
+├── .dockerignore
+├── .gitignore
+├── .gitleaks.toml
+├── codecov.yml
+└── .env.example
+```
+
+## 🚀 Livrables
+
+* ✅ **Dépôt GitHub** : Tous les badges au vert (CI, Security, CD, Documentation, Coverage)
+* ✅ **docker-compose.prod.yml** : Lance l'application avec les images depuis DockerHub
+* ✅ **Sécurité active** : Gitleaks intégré dans la pipeline
+* ✅ **Tests** : 45/45 tests passent avec 88% de couverture
+* ✅ **Documentation** : Déployée sur [GitHub Pages](https://roxiina.github.io/Projet-2/)
+
+---
+
 > 🚀 **Vous voulez juste tester rapidement ?** → Consultez le [**Guide de démarrage rapide (2 min)**](https://roxiina.github.io/Projet-2/quickstart.html)
 
 ## 📖 Documentation
