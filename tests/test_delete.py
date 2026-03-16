@@ -1,15 +1,21 @@
 """Tests pour les endpoints de suppression et fonctionnalités additionnelles."""
 
+import os
 from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
-from main import app
 from modules.connect import Base, get_session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-# Base de données de test en mémoire
+# Définir la variable d'environnement avant d'importer l'application
+os.environ["DB_TYPE"] = "sqlite"
+
+# Importer l'application après avoir défini les variables d'environnement
+from main import app  # noqa: E402
+
+# Base de données de test
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test_delete_db.sqlite"
 
 engine = create_engine(
@@ -31,7 +37,14 @@ def override_get_session():
         db.close()
 
 
+# Override session pour les tests
 app.dependency_overrides[get_session] = override_get_session
+
+# Créer les tables avant de créer le client
+Base.metadata.create_all(bind=engine)
+
+# Créer le client de test
+client = TestClient(app)
 
 
 @pytest.fixture(scope="module", autouse=True)
@@ -39,6 +52,7 @@ def cleanup_database():
     """Fixture pour nettoyer le fichier de base de données après tous les tests."""
     yield
     # Fermer toutes les connexions
+    Base.metadata.drop_all(bind=engine)
     engine.dispose()
     # Supprimer le fichier de test après tous les tests du module
     db_file = Path("./test_delete_db.sqlite")
@@ -51,13 +65,13 @@ def cleanup_database():
 
 @pytest.fixture(scope="function", autouse=True)
 def setup_database():
-    """Fixture pour créer et nettoyer la base de données pour chaque test."""
-    Base.metadata.create_all(bind=engine)
+    """Fixture pour nettoyer la base de données entre chaque test."""
     yield
-    Base.metadata.drop_all(bind=engine)
+    # Nettoyer les données après chaque test (mais pas les tables)
+    with TestingSessionLocal() as db:
+        db.execute(Base.metadata.tables['data'].delete())
+        db.commit()
 
-
-client = TestClient(app)
 
 
 def test_delete_data_success():
@@ -155,13 +169,21 @@ def test_create_data_with_very_large_value():
 
 
 def test_create_data_with_long_description():
-    """Test de création de données avec une longue description."""
-    long_description = "A" * 1000
+    """Test de création de données avec une longue description (dans la limite)."""
+    long_description = "A" * 400  # Sous la limite de 500
     data = {"value": 42.0, "description": long_description}
     response = client.post("/data", json=data)
     assert response.status_code == 201
     response_data = response.json()
     assert response_data["description"] == long_description
+
+
+def test_create_data_with_too_long_description():
+    """Test de création de données avec une description trop longue (validation échoue)."""
+    too_long_description = "A" * 600  # Au-dessus de la limite de 500
+    data = {"value": 42.0, "description": too_long_description}
+    response = client.post("/data", json=data)
+    assert response.status_code == 422  # Unprocessable Entity - validation error
 
 
 def test_get_data_pagination_edge_cases():
