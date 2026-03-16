@@ -58,6 +58,7 @@ Ce projet implémente une architecture microservices complète avec :
 
    deployment/docker
    deployment/cicd
+   deployment/codecov
    deployment/production
    deployment/secrets
 
