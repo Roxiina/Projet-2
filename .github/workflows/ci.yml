@@ -35,9 +35,13 @@ jobs:
       run: |
         uv run ruff check .
     
-    - name: Tests avec Pytest
+    - name: Tests avec Pytest et couverture
       run: |
-        uv run --directory ./app_api pytest ../tests/ -v
+        uv run --directory ./app_api pytest ../tests/ -v --cov=. --cov-report=xml --cov-report=html --cov-report=term
+    
+    - name: Vérifier le taux de couverture
+      run: |
+        uv run --directory ./app_api pytest ../tests/ --cov=. --cov-report=term --cov-fail-under=80
     
     - name: Upload de la couverture
       uses: codecov/codecov-action@v3

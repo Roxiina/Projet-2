@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
 from models import DataCreate, DataResponse
-from modules import create_data, get_all_data, get_data_by_id, get_session, init_db
+from modules import create_data, delete_data, get_all_data, get_data_by_id, get_session, init_db
 
 
 @asynccontextmanager
@@ -59,6 +59,7 @@ async def root():
             "POST /data": "Créer une nouvelle donnée",
             "GET /data": "Récupérer toutes les données",
             "GET /data/{id}": "Récupérer une donnée par ID",
+            "DELETE /data/{id}": "Supprimer une donnée par ID",
         },
     }
 
@@ -118,3 +119,23 @@ async def read_data(data_id: int, db: Session = Depends(get_session)):
 async def health_check():
     """Vérifie l'état de santé de l'API."""
     return {"status": "healthy", "service": "api"}
+
+
+@app.delete("/data/{data_id}", status_code=204)
+async def delete_data_endpoint(data_id: int, db: Session = Depends(get_session)):
+    """Supprime une donnée par son ID.
+
+    Args:
+        data_id: ID de la donnée à supprimer
+        db: Session de base de données
+
+    Returns:
+        Pas de contenu (204 No Content)
+
+    Raises:
+        HTTPException: Si la donnée n'existe pas
+    """
+    success = delete_data(db=db, data_id=data_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Donnée non trouvée")
+    return None

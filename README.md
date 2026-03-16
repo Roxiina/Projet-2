@@ -4,6 +4,7 @@
 [![Security](https://github.com/Roxiina/Projet-2/actions/workflows/security.yml/badge.svg)](https://github.com/Roxiina/Projet-2/actions/workflows/security.yml)
 [![CD](https://github.com/Roxiina/Projet-2/actions/workflows/cd.yml/badge.svg)](https://github.com/Roxiina/Projet-2/actions/workflows/cd.yml)
 [![Documentation](https://github.com/Roxiina/Projet-2/actions/workflows/docs.yml/badge.svg)](https://github.com/Roxiina/Projet-2/actions/workflows/docs.yml)
+[![codecov](https://codecov.io/gh/Roxiina/Projet-2/branch/main/graph/badge.svg)](https://codecov.io/gh/Roxiina/Projet-2)
 
 Application complète de gestion de données avec architecture micro-services, orchestration Docker et CI/CD.
 
